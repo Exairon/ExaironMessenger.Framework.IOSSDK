@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -77,7 +78,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCK-IB-rVg">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↑" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmh-48-UM2">
                                                         <rect key="frame" x="348" y="10" width="40" height="40"/>
@@ -91,22 +92,35 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="W2m-FH-rCR">
-                                                        <rect key="frame" x="5" y="5" width="338" height="50"/>
+                                                        <rect key="frame" x="50" y="5" width="293" height="60"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pm5-gJ-X98">
+                                                        <rect key="frame" x="5" y="15" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="LTR-Ww-2nb"/>
+                                                            <constraint firstAttribute="width" constant="40" id="NeK-V2-TYY"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                        <color key="textColor" name="AccentColor"/>
+                                                        <color key="highlightedColor" name="AccentColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="W2m-FH-rCR" secondAttribute="bottom" constant="5" id="2RX-0N-HHy"/>
-                                                    <constraint firstItem="W2m-FH-rCR" firstAttribute="leading" secondItem="YCK-IB-rVg" secondAttribute="leading" constant="5" id="Egl-i6-Kzn"/>
+                                                    <constraint firstItem="pm5-gJ-X98" firstAttribute="leading" secondItem="YCK-IB-rVg" secondAttribute="leading" constant="5" id="FyJ-c8-nkA"/>
                                                     <constraint firstAttribute="bottom" secondItem="dmh-48-UM2" secondAttribute="bottom" constant="10" id="O34-Ng-X7a"/>
                                                     <constraint firstItem="dmh-48-UM2" firstAttribute="leading" secondItem="W2m-FH-rCR" secondAttribute="trailing" constant="5" id="RmJ-IS-pgt"/>
                                                     <constraint firstItem="W2m-FH-rCR" firstAttribute="top" secondItem="YCK-IB-rVg" secondAttribute="top" constant="5" id="Tk9-7N-QlW"/>
                                                     <constraint firstAttribute="trailing" secondItem="dmh-48-UM2" secondAttribute="trailing" constant="5" id="aS0-0V-7Kw"/>
                                                     <constraint firstItem="dmh-48-UM2" firstAttribute="top" secondItem="YCK-IB-rVg" secondAttribute="top" constant="10" id="fPT-5f-WKG"/>
+                                                    <constraint firstItem="W2m-FH-rCR" firstAttribute="leading" secondItem="pm5-gJ-X98" secondAttribute="trailing" constant="5" id="jB4-7K-WCH"/>
+                                                    <constraint firstItem="pm5-gJ-X98" firstAttribute="top" secondItem="YCK-IB-rVg" secondAttribute="top" constant="15" id="vF4-Is-l7I"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pm5-gJ-X98" secondAttribute="bottom" constant="15" id="w4e-sC-wXP"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -184,6 +198,7 @@
                         <outlet property="messageInput" destination="W2m-FH-rCR" id="wN0-xl-WQd"/>
                         <outlet property="messageScrollView" destination="LIu-Q2-6XI" id="Te9-AW-ASn"/>
                         <outlet property="messageStackView" destination="ZFc-xa-JC2" id="Yjb-9x-irp"/>
+                        <outlet property="plusButton" destination="pm5-gJ-X98" id="ENM-3x-hSg"/>
                         <outlet property="senderButton" destination="dmh-48-UM2" id="6Gb-TW-JR3"/>
                         <outlet property="senderView" destination="cN3-wE-frY" id="UKp-bX-htK"/>
                     </connections>
@@ -213,6 +228,9 @@
     </scenes>
     <resources>
         <image name="exa_splash" width="1080" height="1080"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

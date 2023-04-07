@@ -16,7 +16,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var messageStackView: UIStackView!
     @IBOutlet weak var messageScrollView: UIScrollView!
 
-    //@IBOutlet weak var plusButton: UILabel!
+    @IBOutlet weak var plusButton: UILabel!
     @IBOutlet weak var senderButton: UILabel!
     @IBOutlet weak var messageInput: UITextView!
     let placeholderLabel = UILabel()
@@ -81,8 +81,9 @@ class ChatViewController: UIViewController {
         senderButton.addGestureRecognizer(tapSender)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.openFileBottomSheet))
-        //plusButton.isUserInteractionEnabled = true
-        //plusButton.addGestureRecognizer(tap)
+        plusButton.isUserInteractionEnabled = true
+        plusButton.addGestureRecognizer(tap)
+        //plusButton.titleLabel?.font = .systemFont(ofSize: 50.0, weight: .medium)
 
         State.shared.navigationController = self.navigationController
         State.shared.storyboard = self.storyboard
@@ -178,12 +179,12 @@ class ChatViewController: UIViewController {
     @IBAction func openFileBottomSheet(_ sender: Any) {
         let alert = UIAlertController(title: Localization().locale(key: "chatActions"), message: "", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: Localization().locale(key: "camera"), style: .default, handler: { action in
+        /*alert.addAction(UIAlertAction(title: Localization().locale(key: "camera"), style: .default, handler: { action in
             let picker = UIImagePickerController()
             picker.sourceType = .camera
             picker.delegate = self
             self.present(picker, animated: true)
-        }))
+        }))*/
         
         alert.addAction(UIAlertAction(title: Localization().locale(key: "gallery"), style: .default, handler: { action in
             // GALLERY
