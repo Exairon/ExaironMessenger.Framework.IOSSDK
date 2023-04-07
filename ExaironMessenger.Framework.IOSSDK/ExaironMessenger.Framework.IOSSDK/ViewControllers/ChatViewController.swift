@@ -115,18 +115,42 @@ class ChatViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+        do {
+            if #available(iOS 13.0, *) {
+                let statusBar = UIView(frame: (UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame)!)
+                statusBar.backgroundColor = UIColor(hexString: WidgetSettings.shared.data?.color.headerColor ?? "#FF0000")
+                UIApplication.shared.keyWindow?.addSubview(statusBar)
+            } else {
+                guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBar") as? UIView else { return }
                 statusBar.backgroundColor = UIColor(hexString: WidgetSettings.shared.data?.color.headerColor ?? "#FF0000")
             }
+        }
+        
+        /*
+        if let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+            statusBar.backgroundColor = UIColor(hexString: WidgetSettings.shared.data?.color.headerColor ?? "#FF0000")
+        }*/
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         State.shared.isChatOpen = false
+        do {
+            if #available(iOS 13.0, *) {
+                let statusBar = UIView(frame: (UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame)!)
+                statusBar.backgroundColor = nil
+                UIApplication.shared.keyWindow?.addSubview(statusBar)
+            } else {
+                guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBar") as? UIView else { return }
+                statusBar.backgroundColor = nil
+            }
+        }
+        
+        /*
         if let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView {
             statusBar.backgroundColor = nil
-        }
+        }*/
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
