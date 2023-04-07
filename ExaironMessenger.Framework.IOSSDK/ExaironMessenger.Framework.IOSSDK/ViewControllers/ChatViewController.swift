@@ -16,7 +16,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var messageStackView: UIStackView!
     @IBOutlet weak var messageScrollView: UIScrollView!
 
-    @IBOutlet weak var plusButton: UILabel!
+    //@IBOutlet weak var plusButton: UILabel!
     @IBOutlet weak var senderButton: UILabel!
     @IBOutlet weak var messageInput: UITextView!
     let placeholderLabel = UILabel()
@@ -35,8 +35,6 @@ class ChatViewController: UIViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-        
-        
         
         let fontURL = Bundle(for: Exairon.self).url(forResource: "OpenSans-Regular", withExtension: "ttf")
         CTFontManagerRegisterFontsForURL(fontURL! as CFURL, .process, nil)
@@ -83,9 +81,8 @@ class ChatViewController: UIViewController {
         senderButton.addGestureRecognizer(tapSender)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.openFileBottomSheet))
-        plusButton.isUserInteractionEnabled = true
-        plusButton.addGestureRecognizer(tap)
-        //plusButton.titleLabel?.font = .systemFont(ofSize: 50.0, weight: .medium)
+        //plusButton.isUserInteractionEnabled = true
+        //plusButton.addGestureRecognizer(tap)
 
         State.shared.navigationController = self.navigationController
         State.shared.storyboard = self.storyboard

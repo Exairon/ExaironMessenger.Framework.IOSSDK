@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,7 +12,7 @@
         <!--Exairon View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="ExaironViewController" id="Y6W-OH-hqX" customClass="ExaironViewController" customModule="ExaironMessengerFramework_IOSSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExaironViewController" id="Y6W-OH-hqX" customClass="ExaironViewController" customModule="ExaironMessenger_Framework_IOSSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +42,7 @@
         <!--Form View Controller-->
         <scene sceneID="8UQ-BL-fAR">
             <objects>
-                <viewController storyboardIdentifier="formViewController" id="ZFC-e1-ijo" customClass="FormViewController" customModule="ExaironMessengerFramework_IOSSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="formViewController" id="ZFC-e1-ijo" customClass="FormViewController" customModule="ExaironMessenger_Framework_IOSSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FWb-wi-vMw">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,7 +57,7 @@
         <!--Chat View Controller-->
         <scene sceneID="RN1-UA-Pcd">
             <objects>
-                <viewController storyboardIdentifier="chatViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APq-8j-Pjc" customClass="ChatViewController" customModule="ExaironMessengerFramework_IOSSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APq-8j-Pjc" customClass="ChatViewController" customModule="ExaironMessenger_Framework_IOSSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xe2-1h-CNL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,16 +79,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCK-IB-rVg">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPW-eP-s8k">
-                                                        <rect key="frame" x="0.0" y="10" width="40" height="40"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="I0r-8v-Jrg"/>
-                                                            <constraint firstAttribute="height" constant="40" id="QNj-z8-Lgn"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
-                                                        <color key="textColor" name="AccentColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↑" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmh-48-UM2">
                                                         <rect key="frame" x="348" y="10" width="40" height="40"/>
                                                         <color key="backgroundColor" systemColor="linkColor"/>
@@ -102,7 +91,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="W2m-FH-rCR">
-                                                        <rect key="frame" x="45" y="5" width="298" height="50"/>
+                                                        <rect key="frame" x="5" y="5" width="338" height="50"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -112,13 +101,10 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="W2m-FH-rCR" secondAttribute="bottom" constant="5" id="2RX-0N-HHy"/>
-                                                    <constraint firstItem="W2m-FH-rCR" firstAttribute="leading" secondItem="tPW-eP-s8k" secondAttribute="trailing" constant="5" id="394-mU-f6Q"/>
-                                                    <constraint firstItem="tPW-eP-s8k" firstAttribute="top" secondItem="YCK-IB-rVg" secondAttribute="top" constant="10" id="IHH-3H-JHV"/>
-                                                    <constraint firstAttribute="bottom" secondItem="tPW-eP-s8k" secondAttribute="bottom" constant="10" id="Mtz-Ya-ekx"/>
+                                                    <constraint firstItem="W2m-FH-rCR" firstAttribute="leading" secondItem="YCK-IB-rVg" secondAttribute="leading" constant="5" id="Egl-i6-Kzn"/>
                                                     <constraint firstAttribute="bottom" secondItem="dmh-48-UM2" secondAttribute="bottom" constant="10" id="O34-Ng-X7a"/>
                                                     <constraint firstItem="dmh-48-UM2" firstAttribute="leading" secondItem="W2m-FH-rCR" secondAttribute="trailing" constant="5" id="RmJ-IS-pgt"/>
                                                     <constraint firstItem="W2m-FH-rCR" firstAttribute="top" secondItem="YCK-IB-rVg" secondAttribute="top" constant="5" id="Tk9-7N-QlW"/>
-                                                    <constraint firstItem="tPW-eP-s8k" firstAttribute="leading" secondItem="YCK-IB-rVg" secondAttribute="leading" id="VjQ-Im-Swh"/>
                                                     <constraint firstAttribute="trailing" secondItem="dmh-48-UM2" secondAttribute="trailing" constant="5" id="aS0-0V-7Kw"/>
                                                     <constraint firstItem="dmh-48-UM2" firstAttribute="top" secondItem="YCK-IB-rVg" secondAttribute="top" constant="10" id="fPT-5f-WKG"/>
                                                 </constraints>
@@ -198,7 +184,6 @@
                         <outlet property="messageInput" destination="W2m-FH-rCR" id="wN0-xl-WQd"/>
                         <outlet property="messageScrollView" destination="LIu-Q2-6XI" id="Te9-AW-ASn"/>
                         <outlet property="messageStackView" destination="ZFc-xa-JC2" id="Yjb-9x-irp"/>
-                        <outlet property="plusButton" destination="tPW-eP-s8k" id="Ezk-H0-gVi"/>
                         <outlet property="senderButton" destination="dmh-48-UM2" id="6Gb-TW-JR3"/>
                         <outlet property="senderView" destination="cN3-wE-frY" id="UKp-bX-htK"/>
                     </connections>
@@ -228,9 +213,6 @@
     </scenes>
     <resources>
         <image name="exa_splash" width="1080" height="1080"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

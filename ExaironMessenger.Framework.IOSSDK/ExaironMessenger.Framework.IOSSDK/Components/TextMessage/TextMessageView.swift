@@ -58,7 +58,7 @@ class TextMessageView: UIView {
     
     func convertHtmlStringToText(text: String) -> String {
         //return text
-        return text.replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+        return text.replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "&nbsp;", with: " ").replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
     
     func commonInit() {
