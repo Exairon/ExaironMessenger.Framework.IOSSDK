@@ -14,6 +14,7 @@ class HeaderView: UIView {
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var descriptionView: UILabel!
     @IBOutlet weak var closeButton: UILabel!
+    @IBOutlet weak var backButton: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,7 +34,8 @@ class HeaderView: UIView {
         titleView.textColor = UIColor(hexString: color?.headerFontColor ?? "#000000")
         descriptionView.textColor = UIColor(hexString: color?.headerFontColor ?? "#000000")
         closeButton.textColor = UIColor(hexString: color?.headerFontColor ?? "#000000")
-    
+        backButton.textColor = UIColor(hexString: color?.headerFontColor ?? "#000000")
+        
         titleView.text = messages?.headerTitle ?? ""
         descriptionView.text = messages?.headerMessage ?? ""
         logoImageView.downloaded(from: avatarUrl)

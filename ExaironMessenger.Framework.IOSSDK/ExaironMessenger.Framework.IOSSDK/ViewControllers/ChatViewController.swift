@@ -57,6 +57,10 @@ class ChatViewController: UIViewController {
         header.closeButton.isUserInteractionEnabled = true
         header.closeButton.addGestureRecognizer(tapClose)
         
+        let tapBack = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.backButtonPressed))
+        header.backButton.isUserInteractionEnabled = true
+        header.backButton.addGestureRecognizer(tapBack)
+        
         //messageInput.placeholder = State.shared.widgetMessage?.placeholder ?? ""
         messageInput.backgroundColor = UIColor(hexString: "#1E1E1E10")
         messageInput.layer.cornerRadius = 10
@@ -208,6 +212,11 @@ class ChatViewController: UIViewController {
                 self.messageScrollView.setContentOffset(bottomOffset, animated: true)
             }
         }
+    }
+    
+    
+    @objc func backButtonPressed () {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func closeButtonPressed () {
