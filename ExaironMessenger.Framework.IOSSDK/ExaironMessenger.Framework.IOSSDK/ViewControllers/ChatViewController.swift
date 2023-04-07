@@ -52,7 +52,7 @@ class ChatViewController: UIViewController {
         headerView.addSubview(header.headerView)
         headerView.backgroundColor = UIColor(hexString: color?.headerColor ?? "#FFFFFF")
         setConstraint(view: header.headerView, margins: headerMargins)
-        
+
         let tapClose = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.closeButtonPressed))
         header.closeButton.isUserInteractionEnabled = true
         header.closeButton.addGestureRecognizer(tapClose)
@@ -118,14 +118,23 @@ class ChatViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+                statusBar.backgroundColor = UIColor(hexString: WidgetSettings.shared.data?.color.headerColor ?? "#FF0000")
+            }
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         State.shared.isChatOpen = false
+        if let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+            statusBar.backgroundColor = nil
+        }
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     @objc func appWillEnterForeground() {
@@ -216,7 +225,16 @@ class ChatViewController: UIViewController {
     
     
     @objc func backButtonPressed () {
-        self.navigationController?.popViewController(animated: true)
+        if self.navigationController != nil {
+            if let navigationController = self.navigationController {
+                let viewControllers = navigationController.viewControllers
+                let targetIndex = viewControllers.count - 3 // n-2 index
+                if targetIndex >= 0 && targetIndex < viewControllers.count {
+                    let targetViewController = viewControllers[targetIndex]
+                    navigationController.popToViewController(targetViewController, animated: true)
+                }
+            }
+        }
     }
     
     @objc func closeButtonPressed () {
