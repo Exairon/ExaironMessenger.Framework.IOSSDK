@@ -87,7 +87,6 @@ class ChatViewController: UIViewController {
         plusButton.addGestureRecognizer(tap)
         //plusButton.titleLabel?.font = .systemFont(ofSize: 50.0, weight: .medium)
 
-        State.shared.willBack = true
         State.shared.navigationController = self.navigationController
         State.shared.storyboard = self.storyboard
 

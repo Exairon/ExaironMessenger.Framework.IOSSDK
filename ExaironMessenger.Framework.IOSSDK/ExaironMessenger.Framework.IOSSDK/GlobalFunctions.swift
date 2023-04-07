@@ -188,7 +188,6 @@ func sendSurvey(value: Int, comment: String) {
     State.shared.oldMessages = []
     State.shared.messageArray = []
     writeStringStorage(value: "", key: "conversationId")
-    State.shared.willBack = true
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
         closeFramework()
     }
@@ -206,15 +205,22 @@ func listenFinishSession() {
         } else {
             writeMessage(messages: [])
             writeStringStorage(value: "", key: "conversationId")
-            State.shared.willBack = true
             closeFramework()
         }
     }
 }
 
 func closeFramework() {
-    let viewController = State.shared.storyboard?.instantiateViewController(withIdentifier: "ExaironViewController") as! ExaironViewController
-    State.shared.navigationController?.pushViewController(viewController, animated: true)
+    if State.shared.navigationController != nil {
+        if let navigationController = State.shared.navigationController {
+            let viewControllers = navigationController.viewControllers
+            let targetIndex = viewControllers.count - 3 // n-2 index
+            if targetIndex >= 0 && targetIndex < viewControllers.count {
+                let targetViewController = viewControllers[targetIndex]
+                navigationController.popToViewController(targetViewController, animated: true)
+            }
+        }
+    }
 }
 
 func writeStringStorage(value: String, key: String) {

@@ -15,12 +15,6 @@ public class ExaironViewController: UIViewController {
         super.viewDidLoad()
         
         splashIconView.image = UIImage(named:"exa_splash.png")
-        
-        /*if State.shared.willBack {
-            State.shared.willBack = false
-            self.navigationController?.popToRootViewController(animated: true)
-            return
-        }*/
         SocketService.shared.connect { connection in
             if connection {
                 ApiService.shared.getWidgetSettingsApiCall(){ widgetSettings in
@@ -91,12 +85,6 @@ public class ExaironViewController: UIViewController {
         }
     }
     
-    /*public override func viewWillAppear(_ animated: Bool) {
-        if State.shared.willBack {
-            State.shared.willBack = false
-            self.navigationController?.popViewController(animated: true)
-        }
-    }*/
     
     @objc func dismissFrameworkNavigationController() {
         self.navigationController?.dismiss(animated: true, completion: nil)
