@@ -9,6 +9,7 @@ import UIKit
 
 class SurveyView: UIView {
 
+    @IBOutlet weak var surveyDescription: UILabel!
     @IBOutlet weak var onePointButton: UILabel!
     @IBOutlet weak var twoPointButton: UILabel!
     @IBOutlet weak var threePointButton: UILabel!
@@ -92,6 +93,8 @@ class SurveyView: UIView {
     }
     
     func initialView() {
+        surveyDescription.text = Localization.init().locale(key: "howWasYourExp")
+        surveyDescription.textColor = UIColor(hexString: "#1E1E1E")
         let buttons = [onePointButton, twoPointButton, threePointButton, fourPointButton, fivePointButton]
 
         for button in buttons {
@@ -118,18 +121,19 @@ class SurveyView: UIView {
         fivePointButton?.isUserInteractionEnabled = true
         fivePointButton?.addGestureRecognizer(tapSender5)
         
-        
-        cancelBtn.tintColor = UIColor(hexString: "#9500c2")
+        let color = WidgetSettings.shared.data?.color
+        cancelBtn.tintColor = UIColor(hexString: color?.buttonBackColor ?? "#9500c2")
+        cancelBtn.backgroundColor = UIColor(hexString: color?.buttonFontColor ?? "#FFFFFF")
         cancelBtn.layer.cornerRadius = 10
         cancelBtn.layer.borderWidth = 1
-        cancelBtn.layer.borderColor = UIColor(hexString: "#9500c2").cgColor
+        cancelBtn.layer.borderColor = UIColor(hexString: color?.buttonBackColor ?? "#9500c2").cgColor
         cancelBtn.addTarget(self, action: #selector(cancel(_:)), for: .touchUpInside)
 
-        submitBtn.tintColor = UIColor(hexString: "#FFFFFF")
-        submitBtn.backgroundColor = UIColor(hexString: "#9500c2")
+        submitBtn.tintColor = UIColor(hexString: color?.buttonFontColor ?? "#FFFFFF")
+        submitBtn.backgroundColor = UIColor(hexString: color?.buttonBackColor ?? "#9500c2")
         submitBtn.layer.cornerRadius = 10
         submitBtn.layer.borderWidth = 1
-        submitBtn.layer.borderColor = UIColor(hexString: "#9500c2").cgColor
+        submitBtn.layer.borderColor = UIColor(hexString: color?.buttonBackColor ?? "#9500c2").cgColor
         submitBtn.addTarget(self, action: #selector(submit(_:)), for: .touchUpInside)
 
         
