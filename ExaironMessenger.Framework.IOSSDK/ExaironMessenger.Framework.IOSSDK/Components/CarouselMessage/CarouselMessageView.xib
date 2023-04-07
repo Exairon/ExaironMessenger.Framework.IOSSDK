@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarouselMessageView" customModule="ExaironMessengerFramework_IOSSDK" customModuleProvider="target">
+            <connections>
+                <outlet property="mainView" destination="iN0-l3-epB" id="b8b-gw-CoH"/>
+                <outlet property="view" destination="As2-oL-Win" id="wfO-La-CeU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="441" height="316"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="As2-oL-Win">
+                    <rect key="frame" x="0.0" y="0.0" width="441" height="282"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="As2-oL-Win" secondAttribute="trailing" id="5M8-qz-Z2p"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="As2-oL-Win" secondAttribute="bottom" id="oyw-3H-eCV"/>
+                <constraint firstItem="As2-oL-Win" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qaE-OR-uSR"/>
+                <constraint firstItem="As2-oL-Win" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="qw3-ND-vD0"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="75.572519083969468" y="-169.01408450704227"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

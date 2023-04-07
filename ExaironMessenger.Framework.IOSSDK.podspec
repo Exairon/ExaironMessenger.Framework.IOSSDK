@@ -14,4 +14,9 @@ Pod::Spec.new do |spec|
   
   spec.swift_versions = "5.0"
   spec.source_files  = "ExaironMessenger.Framework.IOSSDK/**/*.{swift}"
+  spec.resources = "ExaironMessenger.Framework.IOSSDK/**/*.{storyboard}", "ExaironMessenger.Framework.IOSSDK/**/*.{xib}", "ExaironMessenger.Framework.IOSSDK/**/*.{ttf}"
+
+  spec.dependency 'Socket.IO-Client-Swift', '~> 16.0.1'
+  spec.dependency 'youtube-ios-player-helper'
+  spec.dependency 'ScalingCarousel'
 end

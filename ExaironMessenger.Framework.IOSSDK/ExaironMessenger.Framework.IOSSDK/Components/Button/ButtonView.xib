@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonView" customModule="ExaironMessengerFramework_IOSSDK" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonMainView" destination="iN0-l3-epB" id="WGh-Gt-2Wp"/>
+                <outlet property="buttonUIView" destination="Wue-oT-8Io" id="uUp-O5-z2v"/>
+                <outlet property="buttonView" destination="sZI-VH-FBe" id="Nud-5Z-OSw"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="238" height="85"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wue-oT-8Io">
+                    <rect key="frame" x="0.0" y="0.0" width="238" height="85"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZI-VH-FBe">
+                            <rect key="frame" x="5" y="5" width="228" height="75"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            <connections>
+                                <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="cuj-q0-CJe"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="sZI-VH-FBe" firstAttribute="leading" secondItem="Wue-oT-8Io" secondAttribute="leading" constant="5" id="FC8-Ut-I8m"/>
+                        <constraint firstItem="sZI-VH-FBe" firstAttribute="top" secondItem="Wue-oT-8Io" secondAttribute="top" constant="5" id="Ggr-Zb-dsN"/>
+                        <constraint firstAttribute="bottom" secondItem="sZI-VH-FBe" secondAttribute="bottom" constant="5" id="Ntt-of-c3S"/>
+                        <constraint firstAttribute="trailing" secondItem="sZI-VH-FBe" secondAttribute="trailing" constant="5" id="aN2-Yb-RQf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Wue-oT-8Io" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Y6n-gX-YQO"/>
+                <constraint firstAttribute="trailing" secondItem="Wue-oT-8Io" secondAttribute="trailing" id="dIH-ly-lrl"/>
+                <constraint firstItem="Wue-oT-8Io" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iNG-7U-6vY"/>
+                <constraint firstAttribute="bottom" secondItem="Wue-oT-8Io" secondAttribute="bottom" id="ifK-yc-jt6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-100.76335877862596" y="-249.64788732394368"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

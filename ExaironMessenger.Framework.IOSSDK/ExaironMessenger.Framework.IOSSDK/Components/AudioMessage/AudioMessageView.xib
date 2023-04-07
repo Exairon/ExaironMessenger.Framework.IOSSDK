@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AudioMessageView" customModule="ExaironMessengerFramework_IOSSDK" customModuleProvider="target">
+            <connections>
+                <outlet property="audioButton" destination="HcD-jT-jMC" id="rlE-xz-DFs"/>
+                <outlet property="audioView" destination="1JM-Av-VLj" id="ULI-u3-O7A"/>
+                <outlet property="slider" destination="8EM-bp-ra1" id="ERz-s8-bxh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="273" height="99"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1JM-Av-VLj">
+                    <rect key="frame" x="16" y="0.0" width="240" height="99"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BSJ-fO-qef">
+                            <rect key="frame" x="15" y="15" width="202" height="69"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcD-jT-jMC">
+                                    <rect key="frame" x="0.0" y="0.0" width="76" height="69"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                </button>
+                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8EM-bp-ra1">
+                                    <rect key="frame" x="74" y="0.0" width="130" height="70"/>
+                                </slider>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="8EM-bp-ra1" secondAttribute="trailing" id="ZrA-xO-a5p"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="BSJ-fO-qef" secondAttribute="bottom" constant="15" id="IOV-Mi-edL"/>
+                        <constraint firstAttribute="trailing" secondItem="BSJ-fO-qef" secondAttribute="trailing" constant="15" id="al5-fb-zGf"/>
+                        <constraint firstItem="BSJ-fO-qef" firstAttribute="top" secondItem="1JM-Av-VLj" secondAttribute="top" constant="15" id="dE6-tP-pio"/>
+                        <constraint firstItem="BSJ-fO-qef" firstAttribute="leading" secondItem="1JM-Av-VLj" secondAttribute="leading" constant="15" id="z3o-FF-uaX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="1JM-Av-VLj" secondAttribute="bottom" id="9nF-rH-WBu"/>
+                <constraint firstItem="1JM-Av-VLj" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.85" id="O9j-tk-aCR"/>
+                <constraint firstItem="1JM-Av-VLj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XR8-mr-eKX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-139.69465648854961" y="-245.42253521126761"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

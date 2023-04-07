@@ -9,12 +9,40 @@
 /* Begin PBXBuildFile section */
 		AC1CEE6729DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1CEE6629DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC1CEE6E29DFF23E007665D6 /* Exairon.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE6D29DFF23E007665D6 /* Exairon.swift */; };
+		AC1CEE7029DFFC2A007665D6 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE6F29DFFC2A007665D6 /* GlobalFunctions.swift */; };
+		AC1CEE7229DFFC41007665D6 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE7129DFFC41007665D6 /* Localization.swift */; };
+		AC1CEE7529DFFC6B007665D6 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE7429DFFC6B007665D6 /* OpenSans-Regular.ttf */; };
+		AC1CEE7829DFFC90007665D6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE7729DFFC90007665D6 /* Color.swift */; };
+		AC1CEE7A29DFFC9C007665D6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE7929DFFC9C007665D6 /* UIImageView.swift */; };
+		AC1CEE7C29DFFCA3007665D6 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE7B29DFFCA3007665D6 /* Date.swift */; };
+		AC1CEE7E29DFFCAB007665D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE7D29DFFCAB007665D6 /* MimeType.swift */; };
+		AC1CEE8329DFFD26007665D6 /* ExaironView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE8229DFFD26007665D6 /* ExaironView.storyboard */; };
+		AC1CEE8629DFFD53007665D6 /* ExaironViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE8529DFFD53007665D6 /* ExaironViewController.swift */; };
+		AC1CEE8829DFFD5C007665D6 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE8729DFFD5C007665D6 /* ChatViewController.swift */; };
+		AC1CEE8A29DFFD67007665D6 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE8929DFFD67007665D6 /* FormViewController.swift */; };
+		AC1CEE8D29DFFD9D007665D6 /* Models in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE8C29DFFD9D007665D6 /* Models */; };
+		AC1CEE8F29DFFDA9007665D6 /* Services in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE8E29DFFDA9007665D6 /* Services */; };
+		AC1CEE9129DFFDB7007665D6 /* Components in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE9029DFFDB7007665D6 /* Components */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AC1CEE6329DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExaironMessenger_Framework_IOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC1CEE6629DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExaironMessenger_Framework_IOSSDK.h; sourceTree = "<group>"; };
 		AC1CEE6D29DFF23E007665D6 /* Exairon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exairon.swift; sourceTree = "<group>"; };
+		AC1CEE6F29DFFC2A007665D6 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		AC1CEE7129DFFC41007665D6 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		AC1CEE7429DFFC6B007665D6 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		AC1CEE7729DFFC90007665D6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		AC1CEE7929DFFC9C007665D6 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		AC1CEE7B29DFFCA3007665D6 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		AC1CEE7D29DFFCAB007665D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
+		AC1CEE8229DFFD26007665D6 /* ExaironView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ExaironView.storyboard; sourceTree = "<group>"; };
+		AC1CEE8529DFFD53007665D6 /* ExaironViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExaironViewController.swift; sourceTree = "<group>"; };
+		AC1CEE8729DFFD5C007665D6 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		AC1CEE8929DFFD67007665D6 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		AC1CEE8C29DFFD9D007665D6 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
+		AC1CEE8E29DFFDA9007665D6 /* Services */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Services; sourceTree = "<group>"; };
+		AC1CEE9029DFFDB7007665D6 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,10 +75,56 @@
 		AC1CEE6529DFEA49007665D6 /* ExaironMessenger.Framework.IOSSDK */ = {
 			isa = PBXGroup;
 			children = (
+				AC1CEE9029DFFDB7007665D6 /* Components */,
+				AC1CEE8E29DFFDA9007665D6 /* Services */,
+				AC1CEE8C29DFFD9D007665D6 /* Models */,
+				AC1CEE8429DFFD3D007665D6 /* ViewControllers */,
+				AC1CEE7F29DFFCE7007665D6 /* Views */,
+				AC1CEE7629DFFC83007665D6 /* Helpers */,
+				AC1CEE7329DFFC60007665D6 /* Fonts */,
 				AC1CEE6629DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.h */,
 				AC1CEE6D29DFF23E007665D6 /* Exairon.swift */,
+				AC1CEE6F29DFFC2A007665D6 /* GlobalFunctions.swift */,
+				AC1CEE7129DFFC41007665D6 /* Localization.swift */,
 			);
 			path = ExaironMessenger.Framework.IOSSDK;
+			sourceTree = "<group>";
+		};
+		AC1CEE7329DFFC60007665D6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AC1CEE7429DFFC6B007665D6 /* OpenSans-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		AC1CEE7629DFFC83007665D6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AC1CEE7729DFFC90007665D6 /* Color.swift */,
+				AC1CEE7929DFFC9C007665D6 /* UIImageView.swift */,
+				AC1CEE7B29DFFCA3007665D6 /* Date.swift */,
+				AC1CEE7D29DFFCAB007665D6 /* MimeType.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AC1CEE7F29DFFCE7007665D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AC1CEE8229DFFD26007665D6 /* ExaironView.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AC1CEE8429DFFD3D007665D6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AC1CEE8529DFFD53007665D6 /* ExaironViewController.swift */,
+				AC1CEE8729DFFD5C007665D6 /* ChatViewController.swift */,
+				AC1CEE8929DFFD67007665D6 /* FormViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +197,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC1CEE8F29DFFDA9007665D6 /* Services in Resources */,
+				AC1CEE8D29DFFD9D007665D6 /* Models in Resources */,
+				AC1CEE8329DFFD26007665D6 /* ExaironView.storyboard in Resources */,
+				AC1CEE9129DFFDB7007665D6 /* Components in Resources */,
+				AC1CEE7529DFFC6B007665D6 /* OpenSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +212,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC1CEE7029DFFC2A007665D6 /* GlobalFunctions.swift in Sources */,
+				AC1CEE7E29DFFCAB007665D6 /* MimeType.swift in Sources */,
+				AC1CEE7C29DFFCA3007665D6 /* Date.swift in Sources */,
+				AC1CEE8629DFFD53007665D6 /* ExaironViewController.swift in Sources */,
+				AC1CEE7A29DFFC9C007665D6 /* UIImageView.swift in Sources */,
+				AC1CEE7829DFFC90007665D6 /* Color.swift in Sources */,
 				AC1CEE6E29DFF23E007665D6 /* Exairon.swift in Sources */,
+				AC1CEE8829DFFD5C007665D6 /* ChatViewController.swift in Sources */,
+				AC1CEE8A29DFFD67007665D6 /* FormViewController.swift in Sources */,
+				AC1CEE7229DFFC41007665D6 /* Localization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
