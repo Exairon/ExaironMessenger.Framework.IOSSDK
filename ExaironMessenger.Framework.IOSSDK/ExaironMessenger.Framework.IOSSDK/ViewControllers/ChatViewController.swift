@@ -15,12 +15,15 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var senderView: UIView!
     @IBOutlet weak var messageStackView: UIStackView!
     @IBOutlet weak var messageScrollView: UIScrollView!
+    @IBOutlet weak var bgView: UIView!
 
     @IBOutlet weak var plusButton: UILabel!
     @IBOutlet weak var senderButton: UILabel!
     @IBOutlet weak var messageInput: UITextView!
     let placeholderLabel = UILabel()
-    
+    var statusBarBackgroundColor: UIColor?
+    var previousStatusBarStyle: UIStatusBarStyle?
+
     var socket: SocketIOClient? = nil
 
     override func viewDidLoad() {
@@ -50,6 +53,7 @@ class ChatViewController: UIViewController {
         headerView.addSubview(header.headerView)
         headerView.backgroundColor = UIColor(hexString: color?.headerColor ?? "#FFFFFF")
         setConstraint(view: header.headerView, margins: headerMargins)
+        bgView.backgroundColor = UIColor(hexString: color?.headerColor ?? "#FFFFFF")
 
         let tapClose = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.closeButtonPressed))
         header.closeButton.isUserInteractionEnabled = true
@@ -118,10 +122,12 @@ class ChatViewController: UIViewController {
         do {
             if #available(iOS 13.0, *) {
                 let statusBar = UIView(frame: (UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame)!)
+                statusBarBackgroundColor = statusBar.backgroundColor
                 statusBar.backgroundColor = UIColor(hexString: WidgetSettings.shared.data?.color.headerColor ?? "#FF0000")
                 UIApplication.shared.keyWindow?.addSubview(statusBar)
             } else {
                 guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBar") as? UIView else { return }
+                statusBarBackgroundColor = statusBar.backgroundColor
                 statusBar.backgroundColor = UIColor(hexString: WidgetSettings.shared.data?.color.headerColor ?? "#FF0000")
             }
         }
@@ -143,7 +149,7 @@ class ChatViewController: UIViewController {
                 UIApplication.shared.keyWindow?.addSubview(statusBar)
             } else {
                 guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBar") as? UIView else { return }
-                statusBar.backgroundColor = nil
+                statusBar.backgroundColor = statusBarBackgroundColor
             }
         }
         

@@ -63,6 +63,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01s-23-jc2">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="134"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oh5-Zk-K80">
                                 <rect key="frame" x="0.0" y="59" width="393" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -173,11 +177,15 @@
                         <viewLayoutGuide key="safeArea" id="Ld7-vK-kcI"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="01s-23-jc2" secondAttribute="trailing" id="20b-7c-xJl"/>
+                            <constraint firstItem="01s-23-jc2" firstAttribute="leading" secondItem="Xe2-1h-CNL" secondAttribute="leading" id="20g-5C-DCb"/>
                             <constraint firstItem="JY9-Y2-zeK" firstAttribute="top" secondItem="Oh5-Zk-K80" secondAttribute="bottom" constant="5" id="38B-8h-4kG"/>
                             <constraint firstItem="Ld7-vK-kcI" firstAttribute="bottom" secondItem="cN3-wE-frY" secondAttribute="bottom" id="3Cq-iN-cES"/>
                             <constraint firstItem="cN3-wE-frY" firstAttribute="width" secondItem="Xe2-1h-CNL" secondAttribute="width" id="7kS-On-f80"/>
                             <constraint firstItem="Ld7-vK-kcI" firstAttribute="trailing" secondItem="JY9-Y2-zeK" secondAttribute="trailing" id="CQ0-Ug-W7y"/>
                             <constraint firstItem="Ld7-vK-kcI" firstAttribute="trailing" secondItem="JY9-Y2-zeK" secondAttribute="trailing" id="ITI-qc-37w"/>
+                            <constraint firstItem="01s-23-jc2" firstAttribute="top" secondItem="Xe2-1h-CNL" secondAttribute="top" id="PSp-HA-Mf2"/>
+                            <constraint firstItem="JY9-Y2-zeK" firstAttribute="top" secondItem="01s-23-jc2" secondAttribute="bottom" id="R8l-KU-5cj"/>
                             <constraint firstItem="cN3-wE-frY" firstAttribute="height" secondItem="Xe2-1h-CNL" secondAttribute="height" multiplier="0.1" id="UnC-Rd-KBl"/>
                             <constraint firstItem="JY9-Y2-zeK" firstAttribute="leading" secondItem="Ld7-vK-kcI" secondAttribute="leading" id="XqQ-wY-6aN"/>
                             <constraint firstItem="Oh5-Zk-K80" firstAttribute="top" secondItem="Ld7-vK-kcI" secondAttribute="top" id="Z0K-bj-eQ9"/>
@@ -193,6 +201,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bgView" destination="01s-23-jc2" id="Fe9-L2-99u"/>
                         <outlet property="headerView" destination="Oh5-Zk-K80" id="tjv-Qc-F9b"/>
                         <outlet property="mainView" destination="Xe2-1h-CNL" id="fgZ-Qy-Yx1"/>
                         <outlet property="messageInput" destination="W2m-FH-rCR" id="wN0-xl-WQd"/>
