@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		AC1CEE6729DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1CEE6629DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC1CEE6E29DFF23E007665D6 /* Exairon.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CEE6D29DFF23E007665D6 /* Exairon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AC1CEE6329DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExaironMessenger_Framework_IOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC1CEE6629DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExaironMessenger_Framework_IOSSDK.h; sourceTree = "<group>"; };
+		AC1CEE6D29DFF23E007665D6 /* Exairon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exairon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 			isa = PBXGroup;
 			children = (
 				AC1CEE6629DFEA49007665D6 /* ExaironMessenger_Framework_IOSSDK.h */,
+				AC1CEE6D29DFF23E007665D6 /* Exairon.swift */,
 			);
 			path = ExaironMessenger.Framework.IOSSDK;
 			sourceTree = "<group>";
@@ -93,6 +96,7 @@
 				TargetAttributes = {
 					AC1CEE6229DFEA49007665D6 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 					};
 				};
 			};
@@ -129,6 +133,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC1CEE6E29DFF23E007665D6 /* Exairon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +263,7 @@
 		AC1CEE6B29DFEA49007665D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -278,6 +284,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -286,6 +293,7 @@
 		AC1CEE6C29DFEA49007665D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
