@@ -36,6 +36,8 @@ class ChatViewController: UIViewController {
             object: nil
         )
         
+        
+        
         let fontURL = Bundle(for: Exairon.self).url(forResource: "OpenSans-Regular", withExtension: "ttf")
         CTFontManagerRegisterFontsForURL(fontURL! as CFURL, .process, nil)
         
@@ -110,8 +112,16 @@ class ChatViewController: UIViewController {
         messageScrollView.endEditing(true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         State.shared.isChatOpen = false
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     @objc func appWillEnterForeground() {

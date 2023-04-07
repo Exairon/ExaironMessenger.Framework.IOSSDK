@@ -94,7 +94,7 @@ public class ExaironViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         if State.shared.willBack {
             State.shared.willBack = false
-            self.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
