@@ -133,7 +133,7 @@ class SurveyView: UIView {
         submitBtn.backgroundColor = UIColor(hexString: color?.buttonBackColor ?? "#9500c2")
         submitBtn.layer.cornerRadius = 10
         submitBtn.layer.borderWidth = 1
-        submitBtn.layer.borderColor = UIColor(hexString: color?.buttonBackColor ?? "#9500c2").cgColor
+        submitBtn.layer.borderColor = UIColor(hexString: color?.buttonFontColor ?? "#9500c2").cgColor
         submitBtn.addTarget(self, action: #selector(submit(_:)), for: .touchUpInside)
 
         

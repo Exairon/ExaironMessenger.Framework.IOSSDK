@@ -39,13 +39,25 @@ class DocumentMessageView: UIView {
     }
     
     func initialView() {
+        let color = WidgetSettings.shared.data?.color
+        var textColor: String!
+        var backColor: String!
+        
+        if sender == "bot_uttered" {
+            textColor = color?.botMessageFontColor ?? "#FFFFFF"
+            backColor = color?.botMessageBackColor ?? "#9500c2"
+        } else {
+            textColor = color?.userMessageFontColor ?? "#FFFFFF"
+            backColor = color?.userMessageBackColor ?? "#9500c2"
+        }
+        
         documentButton.layer.cornerRadius = 10
         documentButton.layer.borderWidth = 1
-        documentButton.layer.borderColor = UIColor(hexString: "#9500c2").cgColor
+        documentButton.layer.borderColor = UIColor(hexString: backColor).cgColor
         documentButton.setTitle("📁 \(originalName)", for: .normal)
-        documentButton.tintColor = UIColor(hexString: "#FFFFFF")
-        documentButton.backgroundColor = UIColor(hexString: "#9500c2")
-        documentView.backgroundColor = UIColor(hexString: "#9500c2")
+        documentButton.tintColor = UIColor(hexString: textColor)
+        documentButton.backgroundColor = UIColor(hexString: backColor)
+        documentView.backgroundColor = UIColor(hexString: backColor)
         documentView.layer.cornerRadius = 10
         documentView.layer.masksToBounds = true
         
