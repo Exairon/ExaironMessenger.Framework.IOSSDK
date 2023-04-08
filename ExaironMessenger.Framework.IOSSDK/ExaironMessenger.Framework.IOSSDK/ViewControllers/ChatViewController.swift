@@ -232,7 +232,7 @@ class ChatViewController: UIViewController {
         }))
         
         alert.addAction(UIAlertAction(title: Localization().locale(key: "cancel"), style: .destructive, handler: { action in
-            self.dismiss(animated: true)
+            alert.dismiss(animated: true)
         }))
 
         present(alert, animated: true, completion: nil)
