@@ -185,6 +185,34 @@ func readMessage() -> [Message] {
     return messages
 }
 
+func writeUserInfo() {
+    do {
+        // Create JSON Encoder
+        let encoder = JSONEncoder()
+        // Encode Note
+        let data = try encoder.encode(User.shared)
+        UserDefaults.standard.set(data, forKey: "userInfo")
+    } catch {
+        print("Unable to Encode Note (\(error))")
+    }
+}
+
+func readUserInfo() -> User? {
+    var userData: User?
+    if let data = UserDefaults.standard.data(forKey: "userInfo") {
+        do {
+            // Create JSON Decoder
+            let decoder = JSONDecoder()
+            // Decode data
+            userData = try decoder.decode(User.self, from: data)
+        } catch {
+            print("Unable to Decode Note (\(error))")
+        }
+    }
+    return userData
+}
+
+
 func getNewMessages(timestamp: String, conversationId: String, completion: @escaping(_ messages: MissingMessageResponse) -> Void) {
     ApiService.shared.getNewMessagesApiCall(timestamp: timestamp, conversationId: conversationId) { result in
         switch result {
