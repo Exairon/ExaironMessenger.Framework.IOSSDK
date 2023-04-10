@@ -231,6 +231,14 @@ class ChatViewController: UIViewController {
             self.present(documentPicker, animated: true, completion: nil)
         }))
         
+        alert.addAction(UIAlertAction(title: Localization().locale(key: "location"), style: .default, handler: { action in
+            let bundle = Bundle(for: Exairon.self)
+            let storyboard = UIStoryboard(name: "LocationView", bundle: bundle)
+            let controller = storyboard.instantiateViewController(withIdentifier: "locationViewController") as! LocationViewController
+            self.present(controller, animated: true, completion: nil)
+            
+        }))
+        
         alert.addAction(UIAlertAction(title: Localization().locale(key: "cancel"), style: .destructive, handler: { action in
             alert.dismiss(animated: true)
         }))

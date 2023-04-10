@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -47,9 +48,24 @@
                     <view key="view" contentMode="scaleToFill" id="FWb-wi-vMw">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uqy-wB-1Kx">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="3KP-5s-Kef"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uqy-wB-1Kx" firstAttribute="top" secondItem="3KP-5s-Kef" secondAttribute="top" id="0Kj-Rb-fbo"/>
+                            <constraint firstItem="3KP-5s-Kef" firstAttribute="bottom" secondItem="uqy-wB-1Kx" secondAttribute="bottom" id="5dh-vt-Kh0"/>
+                            <constraint firstItem="3KP-5s-Kef" firstAttribute="trailing" secondItem="uqy-wB-1Kx" secondAttribute="trailing" id="Hcj-aR-zZE"/>
+                            <constraint firstItem="uqy-wB-1Kx" firstAttribute="leading" secondItem="3KP-5s-Kef" secondAttribute="leading" id="cxe-nG-6tc"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="uqy-wB-1Kx" id="jyE-1y-MWA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dz0-za-Df2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

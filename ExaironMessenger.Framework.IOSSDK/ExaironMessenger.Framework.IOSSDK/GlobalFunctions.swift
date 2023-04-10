@@ -112,6 +112,22 @@ func sendFileMessage(filename: String, mimeType: String, fileData: Data) {
     }
 }
 
+func sendLocationMessage(latitude: Double, longitude: Double) {
+    let location = Location(latitude: latitude, longitude: longitude)
+
+    let newMessage = Message(sender: "user_uttered", type: "location", timeStamp: Int64(NSDate().timeIntervalSince1970 * 1000), location: location)
+    State.shared.messageArray.append(newMessage)
+    let user = getUserMap()
+    
+    let userToken = readStringStorage(key: "userToken") ?? ""
+    let conversationId = readStringStorage(key: "conversationId") ?? ""
+    
+    let longLat = ["latitude": latitude, "longitude": longitude]
+    let locationMessage = ["location": longLat]
+    let sendMessageModel = SocketLocationMessage(channel_id: Exairon.shared.channelId, message: locationMessage, session_id: conversationId, userToken: userToken, user: user)
+    SocketService.shared.socketEmit(eventName: "user_uttered", object: sendMessageModel)
+}
+
 /*@objc func checkAction(sender : UITapGestureRecognizer) {
     /*present(playerController, animated: true, completion: {
         self.player.play()

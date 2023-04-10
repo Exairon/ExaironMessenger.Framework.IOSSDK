@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Location View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="locationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="LocationViewController" customModule="ExaironMessenger_Framework_IOSSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzk-5U-P7f">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCU-Fa-zCb">
+                                <rect key="frame" x="10" y="69" width="50" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="←" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eO5-O9-f3Z">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="37"/>
+                                        <color key="textColor" systemColor="linkColor"/>
+                                        <color key="highlightedColor" systemColor="linkColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Qj7-52-qV0"/>
+                                    <constraint firstAttribute="width" constant="50" id="TDI-5m-FNx"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↑" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDR-NF-p6T">
+                                <rect key="frame" x="343" y="768" width="40" height="40"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="JWd-Qf-3Is"/>
+                                    <constraint firstAttribute="height" constant="40" id="wY3-W2-5mZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yzk-5U-P7f" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="9Go-PB-Stx"/>
+                            <constraint firstItem="UCU-Fa-zCb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="Ihx-4t-XrJ"/>
+                            <constraint firstItem="yzk-5U-P7f" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Od2-j0-OEc"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yzk-5U-P7f" secondAttribute="trailing" id="PGb-TH-zgE"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aDR-NF-p6T" secondAttribute="trailing" constant="10" id="T5p-Xf-1nO"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="aDR-NF-p6T" secondAttribute="bottom" constant="10" id="h3U-Dr-IUX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="yzk-5U-P7f" secondAttribute="bottom" id="wC8-Kg-oxd"/>
+                            <constraint firstItem="UCU-Fa-zCb" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="xWt-cY-vYS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="iconView" destination="UCU-Fa-zCb" id="uFF-gk-Igj"/>
+                        <outlet property="mapView" destination="yzk-5U-P7f" id="PvE-UV-5XZ"/>
+                        <outlet property="senderButton" destination="aDR-NF-p6T" id="P2A-Tc-26l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="17.557251908396946" y="29.577464788732396"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

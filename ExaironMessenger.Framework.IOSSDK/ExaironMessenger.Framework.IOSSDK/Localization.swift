@@ -36,6 +36,7 @@ fileprivate class Exairon_en {
         case "fileSizeErrorTitle": return "File size error!"
         case "fileSizeErrorDescription": return "You can upload files up to 1MB in size."
         case "targetLocation": return "Target Location"
+        case "currentLocation": return "Current Location"
         case "chatActions": return "Chat Actions"
         default: return ""
         }
@@ -71,6 +72,7 @@ fileprivate class Exairon_tr {
         case "fileSizeErrorTitle": return "Dosya boyutu hatası!"
         case "fileSizeErrorDescription": return "En fazla 1MB boyutunda dosya yükleyebilirsiniz."
         case "targetLocation": return "Hedef Konum"
+        case "currentLocation": return "Şu Anki Konum"
         case "chatActions": return "Görüşme Aksiyonları"
         default: return ""
         }
