@@ -38,13 +38,26 @@ class LocationMessageView: UIView {
     }
 
     func initialView() {
+        let color = WidgetSettings.shared.data?.color
+        var textColor: String!
+        var backColor: String!
+
+        if sender == "bot_uttered" {
+            textColor = color?.botMessageFontColor ?? "#FFFFFF"
+            backColor = color?.botMessageBackColor ?? "#9500c2"
+        } else {
+            textColor = color?.userMessageFontColor ?? "#FFFFFF"
+            backColor = color?.userMessageBackColor ?? "#9500c2"
+        }
+        
         locationButton.addTarget(self, action: #selector(locationTapped(_:)), for: .touchUpInside)
-        locationView.backgroundColor = UIColor(hexString: "#9500c2")
+        locationView.backgroundColor = UIColor(hexString: backColor)
         locationButton.titleLabel?.font = .systemFont(ofSize: 40.0, weight: .bold)
         textView.text = Localization.init().locale(key: "location")
         locationView.layer.cornerRadius = 10
         locationView.layer.masksToBounds = true
         textView.font = UIFont(name: "OpenSans-Regular", size: textView.font.pointSize)
+        textView.textColor = UIColor(hexString: textColor)
         let margins = self
         if sender == "bot_uttered" {
             locationView.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 10).isActive = true
