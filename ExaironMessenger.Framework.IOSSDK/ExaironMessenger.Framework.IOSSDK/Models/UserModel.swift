@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User {
+class User: Encodable, Decodable {
     public static let shared = User()
     var name: String? = nil
     var surname: String? = nil

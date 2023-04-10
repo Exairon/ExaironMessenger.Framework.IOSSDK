@@ -22,32 +22,57 @@ public class ExaironViewController: UIViewController {
                     case .failure(let error):
                         print(error)
                     case .success(let data):
-                        self.sessionRequest() { socketResponse in
-                            DispatchQueue.main.async {
-                                WidgetSettings.shared.status = data.status
-                                WidgetSettings.shared.data = data.data
-                                WidgetSettings.shared.geo = data.geo
-                                WidgetSettings.shared.triggerRules = data.triggerRules
-                                State.shared.avatarUrl = Exairon.shared.src + "/uploads/channels/" + (data.data?.avatar ?? "")
+                        State.shared.avatarUrl = Exairon.shared.src + "/uploads/channels/" + (data.data?.avatar ?? "")
 
-                                for _message in data.data?.messages ?? [] {
-                                    if(_message.lang == Exairon.shared.language) {
-                                        State.shared.widgetMessage = _message
+                        for _message in data.data?.messages ?? [] {
+                            if(_message.lang == Exairon.shared.language) {
+                                State.shared.widgetMessage = _message
+                            }
+                        }
+                        if (State.shared.widgetMessage == nil) {
+                            State.shared.widgetMessage = data.data?.messages[0]
+                        }
+                        WidgetSettings.shared.status = data.status
+                        WidgetSettings.shared.data = data.data
+                        WidgetSettings.shared.geo = data.geo
+                        WidgetSettings.shared.triggerRules = data.triggerRules
+                        
+                        
+                        let oldConversationId = readStringStorage(key: "conversationId")
+
+                        if oldConversationId == nil || oldConversationId == "" {
+                            if data.data?.showUserForm == false || self.checkCustomerValues(formFields: data.data?.formFields) {
+                                self.sessionRequest() { socketResponse in
+                                    DispatchQueue.main.async {
+                                        let userToken: String = readStringStorage(key: "userToken") ?? UUID().uuidString
+                                        writeStringStorage(value: userToken, key: "userToken")
+                                        User.shared.name = Exairon.shared.name
+                                        User.shared.surname = Exairon.shared.surname
+                                        User.shared.email = Exairon.shared.email
+                                        User.shared.phone = Exairon.shared.phone
+                                        User.shared.user_unique_id = Exairon.shared.user_unique_id
+                                        writeUserInfo()
+                                        State.shared.oldMessages = []
+                                        State.shared.messageArray = []
+                                        self.changePage(identifier: "chatViewController")
                                     }
                                 }
-                                if (State.shared.widgetMessage == nil) {
-                                    State.shared.widgetMessage = data.data?.messages[0]
-                                }
-                                let oldConversationId = readStringStorage(key: "conversationId")
-                                writeStringStorage(value: socketResponse, key: "conversationId")
-                                if (oldConversationId == socketResponse) {
-                                    User.shared.name = Exairon.shared.name
-                                    User.shared.surname = Exairon.shared.surname
-                                    User.shared.email = Exairon.shared.email
-                                    User.shared.phone = Exairon.shared.phone
-                                    User.shared.user_unique_id = Exairon.shared.user_unique_id
+                            } else {
+                                self.changePage(identifier: "formViewController")
+                            }
+                        } else {
+                            self.sessionRequest() { socketResponse in
+                                DispatchQueue.main.async {
+                                    let userInfo = readUserInfo()
+                                    User.shared.name = Exairon.shared.name ?? userInfo?.email
+                                    User.shared.surname = Exairon.shared.surname ?? userInfo?.surname
+                                    User.shared.email = Exairon.shared.email ?? userInfo?.email
+                                    User.shared.phone = Exairon.shared.phone ?? userInfo?.phone
+                                    User.shared.user_unique_id = Exairon.shared.user_unique_id ?? userInfo?.user_unique_id
+                                    writeUserInfo()
                                     var messages = readMessage()
-                                    if (messages.count > 0) {
+
+                                    if (oldConversationId == socketResponse && messages.count > 0) {
                                         let timestamp = String(messages[messages.count - 1].timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
                                         let conversationId = readStringStorage(key: "conversationId") ?? ""
                                         getNewMessages(timestamp: timestamp, conversationId: conversationId) { newMessages in
@@ -57,23 +82,9 @@ public class ExaironViewController: UIViewController {
                                             State.shared.oldMessages = messages
                                             self.changePage(identifier: "chatViewController")
                                         }
-                                    } else {
-                                        self.changePage(identifier: "chatViewController")
                                     }
-                                } else {
-                                    if (!(data.data?.showUserForm ?? false) || self.checkCustomerValues(formFields: data.data?.formFields)) {
-                                        let userToken: String = readStringStorage(key: "userToken") ?? UUID().uuidString
-                                        writeStringStorage(value: userToken, key: "userToken")
-                                        User.shared.name = Exairon.shared.name
-                                        User.shared.surname = Exairon.shared.surname
-                                        User.shared.email = Exairon.shared.email
-                                        User.shared.phone = Exairon.shared.phone
-                                        User.shared.user_unique_id = Exairon.shared.user_unique_id
-                                        State.shared.oldMessages = []
-                                        State.shared.messageArray = []
+                                    else {
                                         self.changePage(identifier: "chatViewController")
-                                    } else {
-                                        self.changePage(identifier: "formViewController")
                                     }
                                 }
                             }
@@ -91,7 +102,7 @@ public class ExaironViewController: UIViewController {
     }
     
     func checkCustomerValues(formFields: FormFields?) -> Bool {
-        if formFields != nil {
+        if formFields == nil {
             return false
         }
         let checkName = !formFields!.showNameField || !(Exairon.shared.name == nil || Exairon.shared.name == "")
