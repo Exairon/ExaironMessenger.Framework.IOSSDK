@@ -104,6 +104,12 @@ class ChatViewController: UIViewController {
         stackView = messageStackView
         chatsenderView = senderView
         
+        if WidgetSettings.shared.data?.showAttachments == false {
+            plusButton.widthAnchor.constraint(equalToConstant: 0).isActive = true
+            plusButton.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            
+        }
+        
         if WidgetSettings.shared.triggerRules?.count ?? 0 > 0 {
             if State.shared.messageArray.count == 0 && WidgetSettings.shared.triggerRules?[0].enabled == true {
                 sendMessage(message: WidgetSettings.shared.triggerRules?[0].text ?? "", ruleMessage: true)
