@@ -23,7 +23,8 @@
 		AC1CEE8D29DFFD9D007665D6 /* Models in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE8C29DFFD9D007665D6 /* Models */; };
 		AC1CEE8F29DFFDA9007665D6 /* Services in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE8E29DFFDA9007665D6 /* Services */; };
 		AC1CEE9129DFFDB7007665D6 /* Components in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE9029DFFDB7007665D6 /* Components */; };
-		AC3F80F329E4487D008ACDD9 /* FormView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3F80F229E4487D008ACDD9 /* FormView.storyboard */; };
+		ACC134A729E44AF500475D19 /* LocationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACC134A629E44AF500475D19 /* LocationView.storyboard */; };
+		ACC134A929E44B4D00475D19 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC134A829E44B4D00475D19 /* LocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +45,8 @@
 		AC1CEE8C29DFFD9D007665D6 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
 		AC1CEE8E29DFFDA9007665D6 /* Services */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Services; sourceTree = "<group>"; };
 		AC1CEE9029DFFDB7007665D6 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
-		AC3F80F229E4487D008ACDD9 /* FormView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FormView.storyboard; sourceTree = "<group>"; };
+		ACC134A629E44AF500475D19 /* LocationView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationView.storyboard; sourceTree = "<group>"; };
+		ACC134A829E44B4D00475D19 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				AC1CEE8229DFFD26007665D6 /* ExaironView.storyboard */,
-				AC3F80F229E4487D008ACDD9 /* FormView.storyboard */,
+				ACC134A629E44AF500475D19 /* LocationView.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -126,6 +128,7 @@
 				AC1CEE8529DFFD53007665D6 /* ExaironViewController.swift */,
 				AC1CEE8729DFFD5C007665D6 /* ChatViewController.swift */,
 				AC1CEE8929DFFD67007665D6 /* FormViewController.swift */,
+				ACC134A829E44B4D00475D19 /* LocationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -200,12 +203,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACC134A729E44AF500475D19 /* LocationView.storyboard in Resources */,
 				AC1CEE8F29DFFDA9007665D6 /* Services in Resources */,
 				AC1CEE8D29DFFD9D007665D6 /* Models in Resources */,
 				AC1CEE8329DFFD26007665D6 /* ExaironView.storyboard in Resources */,
 				AC1CEE9129DFFDB7007665D6 /* Components in Resources */,
 				AC1CEE7529DFFC6B007665D6 /* OpenSans-Regular.ttf in Resources */,
-				AC3F80F329E4487D008ACDD9 /* FormView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +224,7 @@
 				AC1CEE7C29DFFCA3007665D6 /* Date.swift in Sources */,
 				AC1CEE8629DFFD53007665D6 /* ExaironViewController.swift in Sources */,
 				AC1CEE7A29DFFC9C007665D6 /* UIImageView.swift in Sources */,
+				ACC134A929E44B4D00475D19 /* LocationViewController.swift in Sources */,
 				AC1CEE7829DFFC90007665D6 /* Color.swift in Sources */,
 				AC1CEE6E29DFF23E007665D6 /* Exairon.swift in Sources */,
 				AC1CEE8829DFFD5C007665D6 /* ChatViewController.swift in Sources */,

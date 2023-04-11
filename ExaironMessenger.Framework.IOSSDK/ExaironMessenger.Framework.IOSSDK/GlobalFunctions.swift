@@ -24,28 +24,29 @@ func getMessageView(message: Message) -> UIView? {
     } else {
         messageType = message.type
     }
+    let frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     switch messageType {
     case "text":
-        view = TextMessageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), text: message.text ?? "", sender: message.sender)
+        view = TextMessageView(frame: frame, text: message.text ?? "", sender: message.sender)
     case "image":
-        view = ImageMessageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), imageUrl: message.attachment?.payload?.src ?? "", sender: message.sender)
+        view = ImageMessageView(frame: frame, imageUrl: message.attachment?.payload?.src ?? "", sender: message.sender)
     case "video":
         view = getVideoView(message: message)
     case "document":
-        view = DocumentMessageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), originalName: message.custom?.data?.attachment?.payload?.originalname ?? "", sender: message.sender, documentUrl: message.custom?.data?.attachment?.payload?.src ?? "")
+        view = DocumentMessageView(frame: frame, originalName: message.custom?.data?.attachment?.payload?.originalname ?? "", sender: message.sender, documentUrl: message.custom?.data?.attachment?.payload?.src ?? "")
     case "audio":
-        view = AudioMessageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), audioUrl: message.custom?.data?.attachment?.payload?.src ?? "", sender: message.sender)
+        view = AudioMessageView(frame: frame, audioUrl: message.custom?.data?.attachment?.payload?.src ?? "", sender: message.sender)
     case "location":
         let coordinate = CLLocationCoordinate2DMake(message.location?.latitude ?? 0 ,message.location?.longitude ?? 0)
-        view = LocationMessageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), coordinate: coordinate, sender: message.sender)
+        view = LocationMessageView(frame: frame, coordinate: coordinate, sender: message.sender)
     case "carousel":
-        view = CarouselMessageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), cards: message.attachment?.payload?.elements ?? [])
+        view = CarouselMessageView(frame: frame, cards: message.attachment?.payload?.elements ?? [])
     case "button":
-        view = ButtonMessageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), buttonMessage: message.text ?? "", buttons: message.quick_replies ?? [])
+        view = ButtonMessageView(frame: frame, buttonMessage: message.text ?? "", buttons: message.quick_replies ?? [])
     case "survey":
-        view = SurveyView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view = SurveyView(frame: frame)
     default:
-        view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view = UIView(frame: frame)
     }
     return view
 }

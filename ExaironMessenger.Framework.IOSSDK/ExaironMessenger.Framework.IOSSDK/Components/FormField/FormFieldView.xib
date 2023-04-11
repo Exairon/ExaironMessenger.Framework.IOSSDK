@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormFieldView">
+            <connections>
+                <outlet property="labelView" destination="DeQ-Xr-MAp" id="CPC-bZ-Mjr"/>
+                <outlet property="mainView" destination="mYY-zu-rzm" id="v70-Nk-ukb"/>
+                <outlet property="textField" destination="JnQ-fs-Noa" id="JKK-eW-2Z2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="403" height="103"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYY-zu-rzm">
+                    <rect key="frame" x="0.0" y="0.0" width="403" height="69"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vCi-5V-fxA">
+                            <rect key="frame" x="0.0" y="0.0" width="403" height="69"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeQ-Xr-MAp">
+                                    <rect key="frame" x="0.0" y="0.0" width="403" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JnQ-fs-Noa">
+                                    <rect key="frame" x="0.0" y="26" width="403" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="e3F-Fa-D24"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="DeQ-Xr-MAp" secondAttribute="trailing" id="Rqs-sN-Ewh"/>
+                                <constraint firstItem="DeQ-Xr-MAp" firstAttribute="leading" secondItem="vCi-5V-fxA" secondAttribute="leading" id="XUX-xx-mr9"/>
+                                <constraint firstItem="JnQ-fs-Noa" firstAttribute="leading" secondItem="vCi-5V-fxA" secondAttribute="leading" id="hfL-ij-60j"/>
+                                <constraint firstAttribute="trailing" secondItem="JnQ-fs-Noa" secondAttribute="trailing" id="pBS-LJ-r7B"/>
+                                <constraint firstItem="JnQ-fs-Noa" firstAttribute="top" secondItem="DeQ-Xr-MAp" secondAttribute="bottom" constant="5" id="xAl-Oi-HWj"/>
+                                <constraint firstItem="DeQ-Xr-MAp" firstAttribute="top" secondItem="vCi-5V-fxA" secondAttribute="top" id="yeO-ix-lxF"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="vCi-5V-fxA" secondAttribute="trailing" id="c8c-lw-JO7"/>
+                        <constraint firstItem="vCi-5V-fxA" firstAttribute="top" secondItem="mYY-zu-rzm" secondAttribute="top" id="ikz-Nr-oog"/>
+                        <constraint firstAttribute="bottom" secondItem="vCi-5V-fxA" secondAttribute="bottom" id="k4G-XV-mU0"/>
+                        <constraint firstItem="vCi-5V-fxA" firstAttribute="leading" secondItem="mYY-zu-rzm" secondAttribute="leading" id="uGE-hP-GnO"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="mYY-zu-rzm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5Lv-B7-zK7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mYY-zu-rzm" secondAttribute="bottom" id="7nN-Rl-PUF"/>
+                <constraint firstItem="mYY-zu-rzm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="lup-Rs-lah"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mYY-zu-rzm" secondAttribute="trailing" id="mSI-bJ-ft1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="38.931297709923662" y="-177.81690140845072"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

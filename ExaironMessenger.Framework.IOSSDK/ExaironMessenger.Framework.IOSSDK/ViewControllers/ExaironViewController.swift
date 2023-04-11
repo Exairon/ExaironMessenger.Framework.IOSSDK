@@ -45,12 +45,13 @@ public class ExaironViewController: UIViewController {
                                 self.sessionRequest() { socketResponse in
                                     DispatchQueue.main.async {
                                         let userToken: String = readStringStorage(key: "userToken") ?? UUID().uuidString
+                                        let userInfo = readUserInfo()
                                         writeStringStorage(value: userToken, key: "userToken")
-                                        User.shared.name = Exairon.shared.name
-                                        User.shared.surname = Exairon.shared.surname
-                                        User.shared.email = Exairon.shared.email
-                                        User.shared.phone = Exairon.shared.phone
-                                        User.shared.user_unique_id = Exairon.shared.user_unique_id
+                                        User.shared.name = Exairon.shared.name != nil && Exairon.shared.name != "" ? Exairon.shared.name : userInfo?.name
+                                        User.shared.surname = Exairon.shared.surname != nil && Exairon.shared.surname != "" ? Exairon.shared.surname : userInfo?.surname
+                                        User.shared.email = Exairon.shared.email != nil && Exairon.shared.email != "" ? Exairon.shared.email : userInfo?.email
+                                        User.shared.phone = Exairon.shared.phone != nil && Exairon.shared.phone != "" ? Exairon.shared.phone : userInfo?.phone
+                                        User.shared.user_unique_id = Exairon.shared.user_unique_id != nil && Exairon.shared.user_unique_id != "" ? Exairon.shared.user_unique_id : userInfo?.user_unique_id
                                         writeUserInfo()
                                         State.shared.oldMessages = []
                                         State.shared.messageArray = []
@@ -64,11 +65,11 @@ public class ExaironViewController: UIViewController {
                             self.sessionRequest() { socketResponse in
                                 DispatchQueue.main.async {
                                     let userInfo = readUserInfo()
-                                    User.shared.name = Exairon.shared.name ?? userInfo?.email
-                                    User.shared.surname = Exairon.shared.surname ?? userInfo?.surname
-                                    User.shared.email = Exairon.shared.email ?? userInfo?.email
-                                    User.shared.phone = Exairon.shared.phone ?? userInfo?.phone
-                                    User.shared.user_unique_id = Exairon.shared.user_unique_id ?? userInfo?.user_unique_id
+                                    User.shared.name = Exairon.shared.name != nil && Exairon.shared.name != "" ? Exairon.shared.name : userInfo?.name
+                                    User.shared.surname = Exairon.shared.surname != nil && Exairon.shared.surname != "" ? Exairon.shared.surname : userInfo?.surname
+                                    User.shared.email = Exairon.shared.email != nil && Exairon.shared.email != "" ? Exairon.shared.email : userInfo?.email
+                                    User.shared.phone = Exairon.shared.phone != nil && Exairon.shared.phone != "" ? Exairon.shared.phone : userInfo?.phone
+                                    User.shared.user_unique_id = Exairon.shared.user_unique_id != nil && Exairon.shared.user_unique_id != "" ? Exairon.shared.user_unique_id : userInfo?.user_unique_id
                                     writeUserInfo()
                                     var messages = readMessage()
 
@@ -102,13 +103,15 @@ public class ExaironViewController: UIViewController {
     }
     
     func checkCustomerValues(formFields: FormFields?) -> Bool {
+        let userInfo = readUserInfo()
         if formFields == nil {
             return false
         }
-        let checkName = !formFields!.showNameField || !(Exairon.shared.name == nil || Exairon.shared.name == "")
-        let checkSurname = !formFields!.showSurnameField || !(Exairon.shared.surname == nil || Exairon.shared.surname == "")
-        let checkEmail = !formFields!.showEmailField || !(Exairon.shared.email == nil || Exairon.shared.email == "")
-        let checkPhone = !formFields!.showPhoneField || !(Exairon.shared.phone == nil || Exairon.shared.phone == "")
+        
+        let checkName = !formFields!.showNameField || !(Exairon.shared.name == nil || Exairon.shared.name == "") || !(userInfo?.name == nil || userInfo?.name == "")
+        let checkSurname = !formFields!.showSurnameField || !(Exairon.shared.surname == nil || Exairon.shared.surname == "") || !(userInfo?.surname == nil || userInfo?.surname == "")
+        let checkEmail = !formFields!.showEmailField || !(Exairon.shared.email == nil || Exairon.shared.email == "") || !(userInfo?.email == nil || userInfo?.email == "")
+        let checkPhone = !formFields!.showPhoneField || !(Exairon.shared.phone == nil || Exairon.shared.phone == "") || !(userInfo?.phone == nil || userInfo?.phone == "")
         return checkName && checkSurname && checkEmail && checkPhone
     }
     
@@ -145,6 +148,7 @@ public class ExaironViewController: UIViewController {
             if socketResponse != conversationId {
                 writeMessage(messages: [])
             }
+            writeStringStorage(value: socketResponse, key: "conversationId")
             completion(socketResponse)
         }
     }

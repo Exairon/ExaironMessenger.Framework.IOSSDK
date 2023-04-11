@@ -19,4 +19,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'Socket.IO-Client-Swift', '~> 16.0.1'
   spec.dependency 'youtube-ios-player-helper'
   spec.dependency 'ScalingCarousel'
+  spec.dependency 'libPhoneNumber-iOS'
 end
