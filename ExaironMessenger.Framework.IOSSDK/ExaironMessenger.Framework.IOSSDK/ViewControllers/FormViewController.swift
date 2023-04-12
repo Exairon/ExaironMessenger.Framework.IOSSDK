@@ -23,7 +23,8 @@ class FormViewController: UIViewController {
     var nameFieldView: FormFieldView?
     var surnameFieldView: FormFieldView?
     var emailFieldView: FormFieldView?
-    var phoneFieldView: FormFieldView?
+    var phoneFieldView: PhoneFormFieldView?
+    var countryCodes = [[String]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class FormViewController: UIViewController {
         State.shared.isFormOpen = true
         State.shared.navigationController = self.navigationController
         State.shared.storyboard = self.storyboard
+        
+        self.countryCodes = getAllCountryCodes()
         
         let color = WidgetSettings.shared.data?.color
         let header = HeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -69,7 +72,7 @@ class FormViewController: UIViewController {
             addFormFieldView(fieldView: emailFieldView!)
         }
         if getFormFields().showPhoneField {
-            phoneFieldView = FormFieldView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), label: "phone", placeholder: "phonePlaceholder", value: Exairon.shared.phone, require: getFormFields().phoneFieldRequired)
+            phoneFieldView = PhoneFormFieldView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), label: "phone", placeholder: "phonePlaceholder", value: Exairon.shared.phone, require: getFormFields().phoneFieldRequired)
             addFormFieldView(fieldView: phoneFieldView!)
         }
         formStackMainView.heightAnchor.constraint(equalToConstant: headerHeight).isActive = true
@@ -77,6 +80,26 @@ class FormViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
                view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
+    }
+    
+    func getAllCountryCodes() -> [[String]] {
+        var countrys = [[String]]()
+        let countryList = GlobalConstants.Constants.codePrefixes
+        for item in countryList {
+            countrys.append(item.value)
+        }
+        let sorted = countrys.sorted(by: {$0[0] < $1[0]})
+        return sorted
+    }
+    
+    // MARK: - Create UIPickerView
+    
+    func picker(){
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        phoneFieldView?.counrtyCodeField.inputView = picker
+        picker.selectRow(0, inComponent: 0, animated: true)
     }
     
     @objc func dismissKeyboard() {
@@ -90,9 +113,9 @@ class FormViewController: UIViewController {
         
         let emailCondition = getFormFields().emailFieldRequired ? isValidEmail(email: emailFieldView?.textField?.text ?? "") : (!getFormFields().showEmailField || ((emailFieldView?.textField?.text?.count ?? 0 > 0) ? isValidEmail(email: emailFieldView?.textField?.text ?? "") : true))
         
-        let phoneFieldText = phoneFieldView?.textField?.text?.starts(with: "+") ?? true ? phoneFieldView?.textField?.text : "+\(phoneFieldView?.textField?.text ?? "")"
-        let phoneCondition = getFormFields().phoneFieldRequired ? isValidPhoneNumber(phone: phoneFieldText ?? "") : (!getFormFields().showPhoneField || ((phoneFieldView?.textField?.text?.count ?? 0 > 0) ? isValidPhoneNumber(phone: phoneFieldText ?? "") : true))
-
+        let phoneFieldText = "\(phoneFieldView?.counrtyCodeField.text ?? "") \(phoneFieldView?.textField.text ?? "")"
+        let phoneCondition = getFormFields().phoneFieldRequired ? isValidPhoneNumber(phone: phoneFieldText ) : (!getFormFields().showPhoneField || ((phoneFieldView?.textField?.text?.count ?? 0 > 0) ? isValidPhoneNumber(phone: phoneFieldText) : true))
+        
         if (nameCondition && surnameCondition && emailCondition && phoneCondition) {
             self.sessionRequest() { socketResponse in
                 DispatchQueue.main.async {
@@ -101,7 +124,7 @@ class FormViewController: UIViewController {
                     User.shared.name = self.nameFieldView?.textField?.text
                     User.shared.surname = self.surnameFieldView?.textField?.text
                     User.shared.email = self.emailFieldView?.textField?.text
-                    User.shared.phone = self.phoneFieldView?.textField?.text
+                    User.shared.phone = "\(self.phoneFieldView?.counrtyCodeField.text ?? "")\(self.phoneFieldView?.textField.text ?? "")"
                     User.shared.user_unique_id = Exairon.shared.user_unique_id
                     writeUserInfo()
                     State.shared.oldMessages = []
@@ -156,7 +179,7 @@ class FormViewController: UIViewController {
         }
     }
     
-    func addFormFieldView(fieldView: FormFieldView) {
+    func addFormFieldView(fieldView: AnyObject) {
         formStackView.addArrangedSubview(fieldView.mainView)
 
         let margins = formStackMainView.layoutMarginsGuide
@@ -164,8 +187,18 @@ class FormViewController: UIViewController {
         fieldView.mainView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         fieldView.mainView.topAnchor.constraint(equalTo: margins.topAnchor, constant: headerHeight).isActive = true
         fieldView.textField.delegate = self
+        
+        if (fieldView.counrtyCodeField != nil) {
+            // picker view function calling
+             picker()
+            
+        }
 
         headerHeight += 100
+    }
+    
+    @objc func openCountryBottomSheet() {
+        print("enes")
     }
     
     func getFormFields() -> FormFields {
@@ -243,3 +276,25 @@ extension FormViewController: UITextFieldDelegate {
     }
 }
 
+extension FormViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    // MARK: - UIPickerView Delegate Methods
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return countryCodes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let code = countryCodes[row]
+        return "\(code[0]) +\(code[1])"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let code = countryCodes[row]
+        phoneFieldView?.counrtyCodeField.text = "+\(code[1])"
+    }
+}
