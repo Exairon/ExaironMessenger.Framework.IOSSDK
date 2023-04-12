@@ -19,6 +19,7 @@ struct State {
     var tempMessage: Message? = nil
     var oldMessages: [Message] = []
     var isChatOpen: Bool = false
+    var isFormOpen: Bool = false
     var messageArray: [Message] = [] {
         willSet(newVariableValue) {
             writeMessage(messages: newVariableValue)

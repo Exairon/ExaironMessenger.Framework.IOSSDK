@@ -37,8 +37,8 @@ class FormFieldView: UIView {
         textField.placeholder = Localization.init().locale(key: placeholder ?? "")
         textField.backgroundColor = UIColor(hexString: "#1E1E1E10")
         textField.layer.cornerRadius = 10
-        textField.isUserInteractionEnabled = true
-
+        //textField.isUserInteractionEnabled = true
+        
         if value != nil && value != "" {
             textField.text = value
         }

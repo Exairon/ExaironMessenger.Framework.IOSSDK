@@ -12,7 +12,7 @@ class FormViewController: UIViewController {
     
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var headerView: UIView!
-    //@IBOutlet weak var formStackView: UIStackView!
+    @IBOutlet weak var formStackView: UIStackView!
     @IBOutlet weak var formStackMainView: UIView!
     @IBOutlet weak var headerDescriptionLabel: UILabel!
     @IBOutlet weak var footerDescriptionLabel: UILabel!
@@ -28,6 +28,7 @@ class FormViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        State.shared.isFormOpen = true
         State.shared.navigationController = self.navigationController
         State.shared.storyboard = self.storyboard
         
@@ -72,7 +73,14 @@ class FormViewController: UIViewController {
             addFormFieldView(fieldView: phoneFieldView!)
         }
         formStackMainView.heightAnchor.constraint(equalToConstant: headerHeight).isActive = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+               view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @IBAction func submitForm(_ sender: Any) {
@@ -149,12 +157,14 @@ class FormViewController: UIViewController {
     }
     
     func addFormFieldView(fieldView: FormFieldView) {
-        formStackMainView.addSubview(fieldView.mainView)
+        formStackView.addArrangedSubview(fieldView.mainView)
 
         let margins = formStackMainView.layoutMarginsGuide
         fieldView.mainView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         fieldView.mainView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         fieldView.mainView.topAnchor.constraint(equalTo: margins.topAnchor, constant: headerHeight).isActive = true
+        fieldView.textField.delegate = self
+
         headerHeight += 100
     }
     
@@ -224,20 +234,12 @@ class FormViewController: UIViewController {
         }*/
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension FormViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
-    */
-
 }
 
-struct FormModel {
-    var field: String
-    var view: FormFieldView
-}

@@ -23,6 +23,7 @@
 		AC1CEE8D29DFFD9D007665D6 /* Models in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE8C29DFFD9D007665D6 /* Models */; };
 		AC1CEE8F29DFFDA9007665D6 /* Services in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE8E29DFFDA9007665D6 /* Services */; };
 		AC1CEE9129DFFDB7007665D6 /* Components in Resources */ = {isa = PBXBuildFile; fileRef = AC1CEE9029DFFDB7007665D6 /* Components */; };
+		ACC03CA429E6929D008A805F /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC03CA329E6929D008A805F /* GlobalConstants.swift */; };
 		ACC134A729E44AF500475D19 /* LocationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACC134A629E44AF500475D19 /* LocationView.storyboard */; };
 		ACC134A929E44B4D00475D19 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC134A829E44B4D00475D19 /* LocationViewController.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		AC1CEE8C29DFFD9D007665D6 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
 		AC1CEE8E29DFFDA9007665D6 /* Services */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Services; sourceTree = "<group>"; };
 		AC1CEE9029DFFDB7007665D6 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
+		ACC03CA329E6929D008A805F /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		ACC134A629E44AF500475D19 /* LocationView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationView.storyboard; sourceTree = "<group>"; };
 		ACC134A829E44B4D00475D19 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +111,7 @@
 				AC1CEE7929DFFC9C007665D6 /* UIImageView.swift */,
 				AC1CEE7B29DFFCA3007665D6 /* Date.swift */,
 				AC1CEE7D29DFFCAB007665D6 /* MimeType.swift */,
+				ACC03CA329E6929D008A805F /* GlobalConstants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				AC1CEE6E29DFF23E007665D6 /* Exairon.swift in Sources */,
 				AC1CEE8829DFFD5C007665D6 /* ChatViewController.swift in Sources */,
 				AC1CEE8A29DFFD67007665D6 /* FormViewController.swift in Sources */,
+				ACC03CA429E6929D008A805F /* GlobalConstants.swift in Sources */,
 				AC1CEE7229DFFC41007665D6 /* Localization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -67,7 +67,18 @@
                             </label>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Srl-3X-gjy">
                                 <rect key="frame" x="16" y="162.33333333333337" width="361" height="260"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YXe-Ic-y7b">
+                                        <rect key="frame" x="0.0" y="30" width="361" height="200"/>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="YXe-Ic-y7b" firstAttribute="top" secondItem="Srl-3X-gjy" secondAttribute="top" id="Bl3-nQ-ERu"/>
+                                    <constraint firstAttribute="bottom" secondItem="YXe-Ic-y7b" secondAttribute="bottom" id="VbF-jk-aCz"/>
+                                    <constraint firstAttribute="trailing" secondItem="YXe-Ic-y7b" secondAttribute="trailing" id="a6P-zK-k3L"/>
+                                    <constraint firstItem="YXe-Ic-y7b" firstAttribute="leading" secondItem="Srl-3X-gjy" secondAttribute="leading" id="cyz-TM-hh8"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dl-xu-QA8">
                                 <rect key="frame" x="16" y="432.33333333333337" width="361" height="13.333333333333314"/>
@@ -89,6 +100,12 @@
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ro9-gf-K7T">
+                                <rect key="frame" x="126" y="617" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3KP-5s-Kef"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -124,6 +141,7 @@
                         <outlet property="errorLabel" destination="yfj-vJ-KLv" id="eqY-S4-gpP"/>
                         <outlet property="footerDescriptionLabel" destination="0Dl-xu-QA8" id="BTr-Cz-0oc"/>
                         <outlet property="formStackMainView" destination="Srl-3X-gjy" id="vQ1-WN-vVV"/>
+                        <outlet property="formStackView" destination="YXe-Ic-y7b" id="mAV-sL-hbw"/>
                         <outlet property="headerDescriptionLabel" destination="0CS-CY-5sC" id="15Y-Ab-kl1"/>
                         <outlet property="headerView" destination="1s0-PZ-7ac" id="Qq5-ED-WpU"/>
                         <outlet property="submitButton" destination="sut-z2-mzf" id="OQV-sC-mMD"/>
