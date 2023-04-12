@@ -16,6 +16,7 @@ class FormViewController: UIViewController {
     @IBOutlet weak var formStackMainView: UIView!
     @IBOutlet weak var headerDescriptionLabel: UILabel!
     @IBOutlet weak var footerDescriptionLabel: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     var statusBarBackgroundColor: UIColor?
     var headerHeight: Double = 0
@@ -48,6 +49,7 @@ class FormViewController: UIViewController {
         
         headerDescriptionLabel.text = Localization.init().locale(key: "formTitle")
         footerDescriptionLabel.text = Localization.init().locale(key: "formDesc")
+        errorLabel.text = ""
         submitButton.setTitle(" \(Localization.init().locale(key: "startSession")) ", for: .normal)
         submitButton.backgroundColor = UIColor(hexString: color?.headerColor ?? "#1e1e1e")
         submitButton.setTitleColor(UIColor(hexString: color?.headerFontColor ?? "#ffffff"), for: .normal)
@@ -74,15 +76,15 @@ class FormViewController: UIViewController {
     }
     
     @IBAction func submitForm(_ sender: Any) {
-        let nameCondition = getFormFields().showSurnameField && getFormFields().nameFieldRequired && isValidNameOrSurname(text: nameFieldView?.textField?.text ?? "")
+        let nameCondition = getFormFields().nameFieldRequired ? isValidNameOrSurname(text: nameFieldView?.textField?.text ?? "") : (!getFormFields().showNameField || ((nameFieldView?.textField?.text?.count ?? 0 > 0) ? isValidNameOrSurname(text: nameFieldView?.textField?.text ?? "") : true))
         
-        let surnameCondition = getFormFields().showSurnameField && getFormFields().surnameFieldRequired && isValidNameOrSurname(text: surnameFieldView?.textField?.text ?? "")
+        let surnameCondition = getFormFields().surnameFieldRequired ? isValidNameOrSurname(text: surnameFieldView?.textField?.text ?? "") : (!getFormFields().showSurnameField || ((surnameFieldView?.textField?.text?.count ?? 0 > 0) ? isValidNameOrSurname(text: surnameFieldView?.textField?.text ?? "") : true))
         
-        let emailCondition = isValidEmail(email: emailFieldView?.textField?.text ?? "") && ((getFormFields().showEmailField && emailFieldView?.textField?.text?.count ?? 0 > 0) || getFormFields().emailFieldRequired)
+        let emailCondition = getFormFields().emailFieldRequired ? isValidEmail(email: emailFieldView?.textField?.text ?? "") : (!getFormFields().showEmailField || ((emailFieldView?.textField?.text?.count ?? 0 > 0) ? isValidEmail(email: emailFieldView?.textField?.text ?? "") : true))
         
-        let phoneCondition = isValidPhoneNumber(phone: phoneFieldView?.textField?.text ?? "") && ((getFormFields().showPhoneField && phoneFieldView?.textField?.text?.count ?? 0 > 0) || getFormFields().phoneFieldRequired)
-        
-        if !(nameCondition && surnameCondition && emailCondition && phoneCondition) {
+        let phoneCondition = getFormFields().phoneFieldRequired ? isValidPhoneNumber(phone: phoneFieldView?.textField?.text ?? "") : (!getFormFields().showPhoneField || ((phoneFieldView?.textField?.text?.count ?? 0 > 0) ? isValidPhoneNumber(phone: phoneFieldView?.textField?.text ?? "") : true))
+
+        if (nameCondition && surnameCondition && emailCondition && phoneCondition) {
             self.sessionRequest() { socketResponse in
                 DispatchQueue.main.async {
                     let userToken: String = readStringStorage(key: "userToken") ?? UUID().uuidString
@@ -101,7 +103,7 @@ class FormViewController: UIViewController {
                 }
             }
         } else {
-           
+            errorLabel.text = Localization.init().locale(key: "formError")
         }
         
     }
