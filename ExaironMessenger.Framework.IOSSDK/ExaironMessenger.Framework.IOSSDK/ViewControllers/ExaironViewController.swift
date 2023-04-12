@@ -16,6 +16,8 @@ public class ExaironViewController: UIViewController {
         
         splashIconView.image = UIImage(named:"exa_splash.png")
         SocketService.shared.connect { connection in
+            let socket = SocketService.shared.getSocket()
+            socket?.off(clientEvent: .connect)
             if connection {
                 ApiService.shared.getWidgetSettingsApiCall(){ widgetSettings in
                     switch(widgetSettings) {

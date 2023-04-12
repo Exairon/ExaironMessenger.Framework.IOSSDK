@@ -326,6 +326,8 @@ class ChatViewController: UIViewController {
         //sendMessage(message: "carousel")
         socket?.off("bot_uttered")
         socket?.off("system_uttered")
+        socket?.off("disconnect")
+        socket?.off("connect")
         socket?.on("bot_uttered") {data, ack in
             self.addMessageFromSocket(data: data)
         }
@@ -338,7 +340,9 @@ class ChatViewController: UIViewController {
         socket?.on("connect") { data, ack in
             let conversationId = readStringStorage(key: "conversationId") ?? ""
             let sessionRequestObj = SessionRequest(session_id: conversationId, channelId: Exairon.shared.channelId)
-            let timestamp: String = self.disconnectTime != nil ? String(self.disconnectTime!) : String(State.shared.messageArray.last?.timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
+            var timestamp: String = self.disconnectTime != nil ? String(self.disconnectTime!) : String(State.shared.messageArray.last?.timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
+            let _timestamp = (Int64(timestamp) ?? Int64(NSDate().timeIntervalSince1970 * 1000)) + 1
+            timestamp = String(_timestamp)
             SocketService.shared.socketEmit(eventName: "session_request", object: sessionRequestObj)
             getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
                 for message in messages.data {
