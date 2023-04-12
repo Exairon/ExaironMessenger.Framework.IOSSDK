@@ -259,7 +259,8 @@ func closeFramework() {
     if State.shared.navigationController != nil {
         if let navigationController = State.shared.navigationController {
             let viewControllers = navigationController.viewControllers
-            let targetIndex = viewControllers.count - 3 // n-2 index
+            let targetIndex = viewControllers.count - (State.shared.isFormOpen ? 4 : 3)
+            State.shared.isFormOpen = false
             if targetIndex >= 0 && targetIndex < viewControllers.count {
                 let targetViewController = viewControllers[targetIndex]
                 navigationController.popToViewController(targetViewController, animated: true)

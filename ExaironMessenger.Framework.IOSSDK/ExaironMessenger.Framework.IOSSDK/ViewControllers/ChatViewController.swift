@@ -271,6 +271,7 @@ class ChatViewController: UIViewController {
             if let navigationController = self.navigationController {
                 let viewControllers = navigationController.viewControllers
                 let targetIndex = viewControllers.count - (State.shared.isFormOpen ? 4 : 3)
+                State.shared.isFormOpen = false
                 if targetIndex >= 0 && targetIndex < viewControllers.count {
                     let targetViewController = viewControllers[targetIndex]
                     navigationController.popToViewController(targetViewController, animated: true)
