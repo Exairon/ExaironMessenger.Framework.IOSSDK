@@ -82,7 +82,8 @@ class FormViewController: UIViewController {
         
         let emailCondition = getFormFields().emailFieldRequired ? isValidEmail(email: emailFieldView?.textField?.text ?? "") : (!getFormFields().showEmailField || ((emailFieldView?.textField?.text?.count ?? 0 > 0) ? isValidEmail(email: emailFieldView?.textField?.text ?? "") : true))
         
-        let phoneCondition = getFormFields().phoneFieldRequired ? isValidPhoneNumber(phone: phoneFieldView?.textField?.text ?? "") : (!getFormFields().showPhoneField || ((phoneFieldView?.textField?.text?.count ?? 0 > 0) ? isValidPhoneNumber(phone: phoneFieldView?.textField?.text ?? "") : true))
+        let phoneFieldText = phoneFieldView?.textField?.text?.starts(with: "+") ?? true ? phoneFieldView?.textField?.text : "+\(phoneFieldView?.textField?.text ?? "")"
+        let phoneCondition = getFormFields().phoneFieldRequired ? isValidPhoneNumber(phone: phoneFieldText ?? "") : (!getFormFields().showPhoneField || ((phoneFieldView?.textField?.text?.count ?? 0 > 0) ? isValidPhoneNumber(phone: phoneFieldText ?? "") : true))
 
         if (nameCondition && surnameCondition && emailCondition && phoneCondition) {
             self.sessionRequest() { socketResponse in
