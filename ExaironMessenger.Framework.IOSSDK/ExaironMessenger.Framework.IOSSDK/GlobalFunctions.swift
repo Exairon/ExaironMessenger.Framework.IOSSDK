@@ -58,7 +58,6 @@ func getTimeView(message: Message) -> UIView {
 
 func getUserMap() -> Dictionary<String, String> {
     let name = "\(User.shared.name ?? "") \(User.shared.surname ?? "")".trimmingCharacters(in: .whitespacesAndNewlines)
-    print(name)
     return ["name": name,
             "email": User.shared.email ?? "",
             "phone": User.shared.phone ?? "",

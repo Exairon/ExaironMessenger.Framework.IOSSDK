@@ -23,6 +23,7 @@ class ChatViewController: UIViewController {
     let placeholderLabel = UILabel()
     var statusBarBackgroundColor: UIColor?
     var previousStatusBarStyle: UIStatusBarStyle?
+    var disconnectTime: Int64? = nil
 
     var socket: SocketIOClient? = nil
 
@@ -173,13 +174,13 @@ class ChatViewController: UIViewController {
     @objc func appWillEnterForeground() {
         let conversationId = readStringStorage(key: "conversationId") ?? ""
         let timestamp = String(State.shared.messageArray.last?.timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
-        getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
+        /*getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
             for message in messages.data {
                 DispatchQueue.main.async {
                     State.shared.messageArray.append(message)
                 }
             }
-        }
+        }*/
     }
     
     var anchor: NSLayoutConstraint?
@@ -329,6 +330,22 @@ class ChatViewController: UIViewController {
         }
         socket?.on("system_uttered") {data, ack in
             self.addMessageFromSocket(data: data)
+        }
+        socket?.on("disconnect") {data, ack in
+            self.disconnectTime = Int64(NSDate().timeIntervalSince1970 * 1000)
+        }
+        socket?.on("connect") { data, ack in
+            let conversationId = readStringStorage(key: "conversationId") ?? ""
+            let sessionRequestObj = SessionRequest(session_id: conversationId, channelId: Exairon.shared.channelId)
+            let timestamp: String = self.disconnectTime != nil ? String(self.disconnectTime!) : String(State.shared.messageArray.last?.timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
+            SocketService.shared.socketEmit(eventName: "session_request", object: sessionRequestObj)
+            getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
+                for message in messages.data {
+                    DispatchQueue.main.async {
+                        State.shared.messageArray.append(message)
+                    }
+                }
+            }
         }
     }
     
