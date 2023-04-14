@@ -47,6 +47,9 @@ class ChatViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+
+        
         let color = WidgetSettings.shared.data?.color
         let header = HeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         let headerMargins = headerView.layoutMarginsGuide
@@ -159,7 +162,6 @@ class ChatViewController: UIViewController {
                 statusBar.backgroundColor = statusBarBackgroundColor
             }
         }
-        
         /*
         if let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView {
             statusBar.backgroundColor = nil
@@ -169,6 +171,10 @@ class ChatViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    @objc func appDidEnterBackground() {
+        disconnectTime = Int64(NSDate().timeIntervalSince1970 * 1000)
     }
 
     @objc func appWillEnterForeground() {
@@ -216,12 +222,12 @@ class ChatViewController: UIViewController {
     @IBAction func openFileBottomSheet(_ sender: Any) {
         let alert = UIAlertController(title: Localization().locale(key: "chatActions"), message: "", preferredStyle: .alert)
 
-        /*alert.addAction(UIAlertAction(title: Localization().locale(key: "camera"), style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: Localization().locale(key: "camera"), style: .default, handler: { action in
             let picker = UIImagePickerController()
             picker.sourceType = .camera
             picker.delegate = self
             self.present(picker, animated: true)
-        }))*/
+        }))
         
         alert.addAction(UIAlertAction(title: Localization().locale(key: "gallery"), style: .default, handler: { action in
             // GALLERY
