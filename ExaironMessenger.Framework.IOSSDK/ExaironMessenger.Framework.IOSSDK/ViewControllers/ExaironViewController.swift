@@ -105,7 +105,6 @@ public class ExaironViewController: UIViewController, UIGestureRecognizerDelegat
     }
     
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        // Yandan çekme hareketi yapılırsa geriye doğru gitmeyi engelle
         return false
     }
     
