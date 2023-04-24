@@ -7,13 +7,13 @@
 
 import UIKit
 
-public class ExaironViewController: UIViewController {
+public class ExaironViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var splashIconView: UIImageView!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         splashIconView.image = UIImage(named:"exa_splash.png")
         SocketService.shared.connect { connection in
             let socket = SocketService.shared.getSocket()
@@ -102,6 +102,11 @@ public class ExaironViewController: UIViewController {
     
     @objc func dismissFrameworkNavigationController() {
         self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Yandan çekme hareketi yapılırsa geriye doğru gitmeyi engelle
+        return false
     }
     
     func checkCustomerValues(formFields: FormFields?) -> Bool {

@@ -48,7 +48,6 @@ class ChatViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-
         
         let color = WidgetSettings.shared.data?.color
         let header = HeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -178,8 +177,8 @@ class ChatViewController: UIViewController {
     }
 
     @objc func appWillEnterForeground() {
-        let conversationId = readStringStorage(key: "conversationId") ?? ""
-        let timestamp = String(State.shared.messageArray.last?.timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
+        // let conversationId = readStringStorage(key: "conversationId") ?? ""
+        // let timestamp = String(State.shared.messageArray.last?.timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
         /*getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
             for message in messages.data {
                 DispatchQueue.main.async {
@@ -270,7 +269,6 @@ class ChatViewController: UIViewController {
             }
         }
     }
-    
     
     @objc func backButtonPressed () {
         if self.navigationController != nil {
