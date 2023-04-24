@@ -355,9 +355,11 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
             timestamp = String(_timestamp)
             SocketService.shared.socketEmit(eventName: "session_request", object: sessionRequestObj)
             getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
-                for message in messages.data {
-                    DispatchQueue.main.async {
-                        State.shared.messageArray.append(message)
+                if messages != nil {
+                    for message in messages!.data {
+                        DispatchQueue.main.async {
+                            State.shared.messageArray.append(message)
+                        }
                     }
                 }
             }

@@ -214,11 +214,11 @@ func readUserInfo() -> User? {
 }
 
 
-func getNewMessages(timestamp: String, conversationId: String, completion: @escaping(_ messages: MissingMessageResponse) -> Void) {
+func getNewMessages(timestamp: String, conversationId: String, completion: @escaping(_ messages: MissingMessageResponse?) -> Void) {
     ApiService.shared.getNewMessagesApiCall(timestamp: timestamp, conversationId: conversationId) { result in
         switch result {
-        case .failure(let error):
-            print(error)
+        case .failure(_):
+            completion(nil)
         case .success(let data):
             completion(data)
         }

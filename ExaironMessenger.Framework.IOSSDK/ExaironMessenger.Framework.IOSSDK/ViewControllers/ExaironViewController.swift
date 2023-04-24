@@ -79,7 +79,11 @@ public class ExaironViewController: UIViewController, UIGestureRecognizerDelegat
                                         let timestamp = String(messages[messages.count - 1].timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
                                         let conversationId = readStringStorage(key: "conversationId") ?? ""
                                         getNewMessages(timestamp: timestamp, conversationId: conversationId) { newMessages in
-                                            for message in newMessages.data {
+                                            if newMessages == nil {
+                                                self.changePage(identifier: "chatViewController")
+                                                return
+                                            }
+                                            for message in newMessages!.data {
                                                 messages.append(message)
                                             }
                                             State.shared.oldMessages = messages
