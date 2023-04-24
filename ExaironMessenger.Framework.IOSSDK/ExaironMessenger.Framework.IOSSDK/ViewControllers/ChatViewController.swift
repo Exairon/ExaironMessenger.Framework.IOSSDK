@@ -9,7 +9,7 @@ import UIKit
 import MobileCoreServices
 import SocketIO
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var senderView: UIView!
@@ -29,6 +29,8 @@ class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
 
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
             view.addGestureRecognizer(tapGesture)
@@ -170,6 +172,10 @@ class ChatViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
     
     @objc func appDidEnterBackground() {
