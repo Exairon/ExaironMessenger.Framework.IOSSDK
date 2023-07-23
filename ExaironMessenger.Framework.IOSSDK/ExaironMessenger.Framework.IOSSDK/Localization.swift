@@ -38,6 +38,9 @@ fileprivate class Exairon_en {
         case "targetLocation": return "Target Location"
         case "currentLocation": return "Current Location"
         case "chatActions": return "Chat Actions"
+        case "messages": return "Messages"
+        case "unsupportedNessage": return "Unsupported Messages"
+        case "startNewSession": return "Start New Session"
         default: return ""
         }
     }
@@ -74,6 +77,9 @@ fileprivate class Exairon_tr {
         case "targetLocation": return "Hedef Konum"
         case "currentLocation": return "Şu Anki Konum"
         case "chatActions": return "Görüşme Aksiyonları"
+        case "messages": return "Mesajlar"
+        case "unsupportedNessage": return "Desteklenmeyen Mesaj"
+        case "startNewSession": return "Yeni Görüşme Başlat"
         default: return ""
         }
     }

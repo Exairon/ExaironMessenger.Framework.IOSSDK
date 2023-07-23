@@ -20,6 +20,7 @@ struct State {
     var oldMessages: [Message] = []
     var isChatOpen: Bool = false
     var isFormOpen: Bool = false
+    var customerSessions: [CustomerSession] = []
     var messageArray: [Message] = [] {
         willSet(newVariableValue) {
             writeMessage(messages: newVariableValue)

@@ -37,6 +37,19 @@ class ApiService {
         }.resume()
     }
     
+    func getCustomerSessions(userToken: String, completion: @escaping (Result<CustomerSessionResponse, ApiErrors>)->Void) {
+        guard let url = URL(string: "\(Exairon.shared.src)/api/v1/sessions/getSdkCustomerSessions?userToken=\(userToken)") else{
+            return
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            guard let data = data, error == nil else { return completion(.failure(.NotFound)) }
+            guard let customerSessions = try? JSONDecoder().decode(CustomerSessionResponse.self, from: data) else { return completion(.failure(.DataNotProcessing)) }
+            completion(.success(customerSessions))
+        }.resume()
+    }
+    
     func uploadFileApiCall(conversationId: String, filename: String, mimeType: String, fileData: Data, completion: @escaping (Result<FileUploadResponse, ApiErrors>)->Void) {
         var multipart = MultipartRequest()
         guard let url = URL(string: "\(Exairon.shared.src)/uploads/chat") else{

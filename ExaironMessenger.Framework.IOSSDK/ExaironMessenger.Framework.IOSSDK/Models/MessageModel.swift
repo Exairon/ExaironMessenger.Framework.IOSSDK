@@ -14,8 +14,8 @@ struct Messages: Codable {
 
 // MARK: - Message
 struct Message: Codable, Hashable {
-    var sender: String
-    var type: String
+    var sender: String? = nil
+    var type: String? = nil
     var timeStamp: Int64? = nil
     var location: Location? = nil
     var text: String? = nil

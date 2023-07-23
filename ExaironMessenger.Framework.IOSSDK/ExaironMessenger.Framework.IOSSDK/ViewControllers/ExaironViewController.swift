@@ -15,7 +15,43 @@ public class ExaironViewController: UIViewController, UIGestureRecognizerDelegat
         super.viewDidLoad()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         splashIconView.image = UIImage(named:"exa_splash.png")
-        SocketService.shared.connect { connection in
+        
+        ApiService.shared.getWidgetSettingsApiCall(){ widgetSettings in
+            switch(widgetSettings) {
+            case .failure(let error):
+                print(error)
+            case .success(let data):
+                State.shared.avatarUrl = Exairon.shared.src + "/uploads/channels/" + (data.data?.avatar ?? "")
+                for _message in data.data?.messages ?? [] {
+                    if(_message.lang == Exairon.shared.language) {
+                        State.shared.widgetMessage = _message
+                    }
+                }
+                if (State.shared.widgetMessage == nil) {
+                    State.shared.widgetMessage = data.data?.messages[0]
+                }
+                WidgetSettings.shared.status = data.status
+                WidgetSettings.shared.data = data.data
+                WidgetSettings.shared.geo = data.geo
+                WidgetSettings.shared.triggerRules = data.triggerRules
+                
+                let userToken: String = readStringStorage(key: "userToken") ?? UUID().uuidString
+                writeStringStorage(value: userToken, key: "userToken")
+                ApiService.shared.getCustomerSessions(userToken: userToken) { customerSessions in
+                    switch(customerSessions) {
+                    case .failure(let error):
+                        print(error)
+                    case .success(let data):
+                        State.shared.customerSessions = data.data
+                        self.changePage(identifier: "sessionListViewController")
+                    }
+                }
+                
+            }
+        }
+        
+        
+        /*SocketService.shared.connect { connection in
             let socket = SocketService.shared.getSocket()
             socket?.off(clientEvent: .connect)
             if connection {
@@ -100,7 +136,7 @@ public class ExaironViewController: UIViewController, UIGestureRecognizerDelegat
                 }
             
             }
-        }
+        }*/
     }
     
     
@@ -134,6 +170,10 @@ public class ExaironViewController: UIViewController, UIGestureRecognizerDelegat
                 break
             case "formViewController":
                 viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) as! FormViewController
+                break
+            case "sessionListViewController":
+                viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) as! SessionListViewController
+                break
             default: break
             }
             if viewController != nil {
