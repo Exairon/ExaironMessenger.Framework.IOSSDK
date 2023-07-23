@@ -37,13 +37,15 @@ class SessionListView: UIView {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        print(session.conversationId)
         State.shared.selectedConversationId = session.conversationId
         State.shared.isClosedSession = session.status == "closed"
-        DispatchQueue.main.async {
-            let viewController = self.sessionController.storyboard?.instantiateViewController(withIdentifier: "chatViewController") as! ChatViewController
-            self.sessionController.navigationController?.pushViewController(viewController, animated: true)
+        SocketService.shared.connect { connection in
+            DispatchQueue.main.async {
+                let viewController = self.sessionController.storyboard?.instantiateViewController(withIdentifier: "chatViewController") as! ChatViewController
+                self.sessionController.navigationController?.pushViewController(viewController, animated: true)
+            }
         }
+        
     }
     
     func initialView() {

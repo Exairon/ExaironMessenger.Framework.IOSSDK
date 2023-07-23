@@ -52,22 +52,31 @@ class SessionListViewController: UIViewController {
     
     @objc func newSessionStart() {
         State.shared.isNewSession = true
+        State.shared.isClosedSession = false
+        State.shared.selectedConversationId = nil
         if WidgetSettings.shared.data?.showUserForm == false || self.checkCustomerValues(formFields: WidgetSettings.shared.data?.formFields) {
-            self.sessionRequest() { socketResponse in
-                DispatchQueue.main.async {
-                    let userToken: String = readStringStorage(key: "userToken") ?? UUID().uuidString
-                    let userInfo = readUserInfo()
-                    writeStringStorage(value: userToken, key: "userToken")
-                    User.shared.name = Exairon.shared.name != nil && Exairon.shared.name != "" ? Exairon.shared.name : userInfo?.name
-                    User.shared.surname = Exairon.shared.surname != nil && Exairon.shared.surname != "" ? Exairon.shared.surname : userInfo?.surname
-                    User.shared.email = Exairon.shared.email != nil && Exairon.shared.email != "" ? Exairon.shared.email : userInfo?.email
-                    User.shared.phone = Exairon.shared.phone != nil && Exairon.shared.phone != "" ? Exairon.shared.phone : userInfo?.phone
-                    User.shared.user_unique_id = Exairon.shared.user_unique_id != nil && Exairon.shared.user_unique_id != "" ? Exairon.shared.user_unique_id : userInfo?.user_unique_id
-                    writeUserInfo()
-                    State.shared.oldMessages = []
-                    State.shared.messageArray = []
-                    self.changePage(identifier: "chatViewController")
+            SocketService.shared.connect { connection in
+                let socket = SocketService.shared.getSocket()
+                socket?.off(clientEvent: .connect)
+                if connection {
+                    self.sessionRequest() { socketResponse in
+                        DispatchQueue.main.async {
+                            let userToken: String = readStringStorage(key: "userToken") ?? UUID().uuidString
+                            let userInfo = readUserInfo()
+                            writeStringStorage(value: userToken, key: "userToken")
+                            User.shared.name = Exairon.shared.name != nil && Exairon.shared.name != "" ? Exairon.shared.name : userInfo?.name
+                            User.shared.surname = Exairon.shared.surname != nil && Exairon.shared.surname != "" ? Exairon.shared.surname : userInfo?.surname
+                            User.shared.email = Exairon.shared.email != nil && Exairon.shared.email != "" ? Exairon.shared.email : userInfo?.email
+                            User.shared.phone = Exairon.shared.phone != nil && Exairon.shared.phone != "" ? Exairon.shared.phone : userInfo?.phone
+                            User.shared.user_unique_id = Exairon.shared.user_unique_id != nil && Exairon.shared.user_unique_id != "" ? Exairon.shared.user_unique_id : userInfo?.user_unique_id
+                            writeUserInfo()
+                            State.shared.oldMessages = []
+                            State.shared.messageArray = []
+                            self.changePage(identifier: "chatViewController")
+                        }
+                    }
                 }
+                
             }
         } else {
             self.changePage(identifier: "formViewController")
@@ -114,17 +123,14 @@ class SessionListViewController: UIViewController {
         }
         
         func sessionRequest(completion: @escaping (_ success: String) -> Void) {
-            let conversationId = readStringStorage(key: "conversationId")
-            let sessionRequestObj = SessionRequest(session_id: conversationId, channelId: Exairon.shared.channelId)
+            let sessionRequestObj = SessionRequest(session_id: "", channelId: Exairon.shared.channelId, channel_id: Exairon.shared.channelId)
             SocketService.shared.socketEmit(eventName: "session_request", object: sessionRequestObj)
             let socket = SocketService.shared.getSocket()
             socket?.once("session_confirm") {data, ack in
                 guard let socketResponse = data[0] as? String else {
                     return
                 }
-                if socketResponse != conversationId {
-                    writeMessage(messages: [])
-                }
+                writeMessage(messages: [])
                 writeStringStorage(value: socketResponse, key: "conversationId")
                 completion(socketResponse)
             }

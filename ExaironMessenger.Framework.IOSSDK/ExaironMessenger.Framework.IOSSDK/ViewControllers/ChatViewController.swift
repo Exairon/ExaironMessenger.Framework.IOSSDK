@@ -102,30 +102,6 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
         State.shared.navigationController = self.navigationController
         State.shared.storyboard = self.storyboard
         
-        if State.shared.isClosedSession {
-            senderSubView.isHidden = true
-            loadingView.center = CGPoint(x: sessionListView.frame.size.width / 2,
-                                         y: sessionListView.frame.size.height / 2)
-            sessionFinishedLabelView.text = Localization().locale(key: "sessionEnded")
-            if State.shared.selectedConversationId != nil {
-                getNewMessages(timestamp: "0", conversationId: State.shared.selectedConversationId!) { messages in
-                    DispatchQueue.main.async {
-                        self.loadingView.isHidden = true
-                    }
-                    if messages != nil {
-                        for message in messages!.data {
-                            DispatchQueue.main.async {
-                                State.shared.messageArray.append(message)
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            sessionFinishedView.isHidden = true
-            loadingView.isHidden = true
-        }
-
         if State.shared.oldMessages.count > 0 {
             State.shared.messageArray = []
             for message in State.shared.oldMessages {
@@ -149,8 +125,38 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
                 sendMessage(message: WidgetSettings.shared.triggerRules?[0].text ?? "", ruleMessage: true)
             }
         }
-        listenNewMessages()
-        listenFinishSession()
+        
+        if State.shared.isClosedSession {
+            senderSubView.isHidden = true
+            loadingView.center = CGPoint(x: sessionListView.frame.size.width / 2,
+                                         y: sessionListView.frame.size.height / 2)
+            sessionFinishedLabelView.text = Localization().locale(key: "sessionEnded")
+            if State.shared.selectedConversationId != nil {
+                getNewMessages(timestamp: "0", conversationId: State.shared.selectedConversationId!) { messages in
+                    DispatchQueue.main.async {
+                        self.loadingView.isHidden = true
+                    }
+                    if messages != nil {
+                        for message in messages!.data {
+                            DispatchQueue.main.async {
+                                State.shared.messageArray.append(message)
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            sessionFinishedView.isHidden = true
+            loadingView.isHidden = true
+            let messsages = readMessage()
+            for message in messsages {
+                DispatchQueue.main.async {
+                    State.shared.messageArray.append(message)
+                }
+            }
+            listenNewMessages()
+            listenFinishSession()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -361,6 +367,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func listenNewMessages() {
+        print("wtfff")
         socket = SocketService.shared.getSocket()
         //sendMessage(message: "carousel")
         socket?.off("bot_uttered")
@@ -376,22 +383,28 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
         socket?.on("disconnect") {data, ack in
             self.disconnectTime = Int64(NSDate().timeIntervalSince1970 * 1000)
         }
-        socket?.on("connect") { data, ack in
-            let conversationId = readStringStorage(key: "conversationId") ?? ""
-            let sessionRequestObj = SessionRequest(session_id: conversationId, channelId: Exairon.shared.channelId)
-            var timestamp: String = self.disconnectTime != nil ? String(self.disconnectTime!) : String(State.shared.messageArray.last?.timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
-            let _timestamp = (Int64(timestamp) ?? Int64(NSDate().timeIntervalSince1970 * 1000)) + 1
-            timestamp = String(_timestamp)
-            SocketService.shared.socketEmit(eventName: "session_request", object: sessionRequestObj)
-            getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
-                if messages != nil {
-                    for message in messages!.data {
-                        DispatchQueue.main.async {
-                            State.shared.messageArray.append(message)
-                        }
+        var timestamp: String = self.disconnectTime != nil ? String(self.disconnectTime!) : String(State.shared.messageArray.last?.timeStamp ?? Int64(NSDate().timeIntervalSince1970 * 1000))
+        let _timestamp = (Int64(timestamp) ?? Int64(NSDate().timeIntervalSince1970 * 1000)) + 1
+        timestamp = String(_timestamp)
+        let conversationId = readStringStorage(key: "conversationId") ?? State.shared.selectedConversationId ?? ""
+
+        getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
+            if messages != nil {
+                for message in messages!.data {
+                    DispatchQueue.main.async {
+                        State.shared.messageArray.append(message)
                     }
                 }
             }
+        }
+        socket?.on("connect") { data, ack in
+            let conversationId = readStringStorage(key: "conversationId") ?? State.shared.selectedConversationId ?? ""
+            let sessionRequestObj = SessionRequest(session_id: conversationId, channelId: Exairon.shared.channelId)
+            
+            SocketService.shared.socketEmit(eventName: "session_request", object: sessionRequestObj)
+            print(timestamp)
+            print(conversationId)
+            
         }
     }
     
