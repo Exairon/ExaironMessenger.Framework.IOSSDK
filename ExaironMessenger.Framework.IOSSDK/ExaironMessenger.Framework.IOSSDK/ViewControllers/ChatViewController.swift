@@ -13,9 +13,14 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var senderView: UIView!
+    @IBOutlet weak var senderSubView: UIView!
+    @IBOutlet weak var sessionFinishedView: UIView!
+    @IBOutlet weak var sessionFinishedLabelView: UILabel!
     @IBOutlet weak var messageStackView: UIStackView!
     @IBOutlet weak var messageScrollView: UIScrollView!
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var loadingView: UIActivityIndicatorView!
+    @IBOutlet weak var sessionListView: UIView!
 
     @IBOutlet weak var plusButton: UILabel!
     @IBOutlet weak var senderButton: UILabel!
@@ -96,6 +101,30 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
 
         State.shared.navigationController = self.navigationController
         State.shared.storyboard = self.storyboard
+        
+        if State.shared.isClosedSession {
+            senderSubView.isHidden = true
+            loadingView.center = CGPoint(x: sessionListView.frame.size.width / 2,
+                                         y: sessionListView.frame.size.height / 2)
+            sessionFinishedLabelView.text = Localization().locale(key: "sessionEnded")
+            if State.shared.selectedConversationId != nil {
+                getNewMessages(timestamp: "0", conversationId: State.shared.selectedConversationId!) { messages in
+                    DispatchQueue.main.async {
+                        self.loadingView.isHidden = true
+                    }
+                    if messages != nil {
+                        for message in messages!.data {
+                            DispatchQueue.main.async {
+                                State.shared.messageArray.append(message)
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            sessionFinishedView.isHidden = true
+            loadingView.isHidden = true
+        }
 
         if State.shared.oldMessages.count > 0 {
             State.shared.messageArray = []
@@ -280,7 +309,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
         if self.navigationController != nil {
             if let navigationController = self.navigationController {
                 let viewControllers = navigationController.viewControllers
-                let targetIndex = viewControllers.count - (State.shared.isFormOpen ? 4 : 3)
+                let targetIndex = viewControllers.count - (State.shared.isFormOpen ? 5 : 4)
                 State.shared.isFormOpen = false
                 if targetIndex >= 0 && targetIndex < viewControllers.count {
                     let targetViewController = viewControllers[targetIndex]

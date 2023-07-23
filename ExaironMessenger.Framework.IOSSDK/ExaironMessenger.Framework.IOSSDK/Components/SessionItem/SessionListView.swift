@@ -17,15 +17,17 @@ class SessionListView: UIView {
     @IBOutlet weak var lastMessageLabelView: UILabel!
     @IBOutlet weak var iconView: UILabel!
     
-    var avatar: String!
-    var lastMessageText: String!
-    var isClosed: Bool!
+    var session: CustomerSession!
+    var sessionController: SessionListViewController!
     
-    init(frame: CGRect, avatar: String, lastMessageText: String, isClosed: Bool) {
+    init(frame: CGRect, sessionController: SessionListViewController ,customerSession: CustomerSession) {
         super.init(frame: frame)
-        self.avatar = Exairon.shared.src + "/uploads/channels/" + avatar.replacingOccurrences(of: "svg", with: "png")
-        self.lastMessageText = convertHtmlStringToText(text: lastMessageText)
-        self.isClosed = isClosed
+        self.session = customerSession
+        self.sessionController = sessionController
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        self.addGestureRecognizer(tapGesture)
+        
         commonInit()
     }
     
@@ -34,14 +36,24 @@ class SessionListView: UIView {
         commonInit()
     }
     
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        print(session.conversationId)
+        State.shared.selectedConversationId = session.conversationId
+        State.shared.isClosedSession = session.status == "closed"
+        DispatchQueue.main.async {
+            let viewController = self.sessionController.storyboard?.instantiateViewController(withIdentifier: "chatViewController") as! ChatViewController
+            self.sessionController.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func initialView() {
         let color = WidgetSettings.shared.data?.color
 
-        imageView.downloaded(from: avatar)
-        lastMessageLabelView.text = lastMessageText ?? "Enes"
+        imageView.downloaded(from:  Exairon.shared.src + "/uploads/channels/" + session.assignedTo.avatar.replacingOccurrences(of: "svg", with: "png"))
+        lastMessageLabelView.text = convertHtmlStringToText(text: session.lastMessage.text ?? Localization().locale(key: "unsupportedMessage"))
         customerNameLabelView.text = "Enes Toprak"
-        iconView.text = isClosed ? "►" : "•"
-        iconView.textColor = isClosed ? UIColor(hexString: color?.headerColor ?? "#00FF57") : UIColor(hexString: "#00FF57")
+        iconView.text = session.status == "closed" ? "►" : "•"
+        iconView.textColor = session.status == "closed" ? UIColor(hexString: color?.headerColor ?? "#00FF57") : UIColor(hexString: "#00FF57")
 
         borderView.backgroundColor = UIColor(hexString: color?.headerColor ?? "#00FF57")
 

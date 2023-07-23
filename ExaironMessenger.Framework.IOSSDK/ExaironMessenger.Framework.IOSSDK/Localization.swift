@@ -41,6 +41,7 @@ fileprivate class Exairon_en {
         case "messages": return "Messages"
         case "unsupportedNessage": return "Unsupported Messages"
         case "startNewSession": return "Start New Session"
+        case "sessionEnded": return "Session Ended"
         default: return ""
         }
     }
@@ -80,6 +81,7 @@ fileprivate class Exairon_tr {
         case "messages": return "Mesajlar"
         case "unsupportedNessage": return "Desteklenmeyen Mesaj"
         case "startNewSession": return "Yeni Görüşme Başlat"
+        case "sessionEnded": return "Görüşme Sonlanmıştır"
         default: return ""
         }
     }

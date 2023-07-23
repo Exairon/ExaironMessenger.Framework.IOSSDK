@@ -21,6 +21,9 @@ struct State {
     var isChatOpen: Bool = false
     var isFormOpen: Bool = false
     var customerSessions: [CustomerSession] = []
+    var selectedConversationId: String? = nil
+    var isClosedSession: Bool = true
+    var isNewSession: Bool = false
     var messageArray: [Message] = [] {
         willSet(newVariableValue) {
             writeMessage(messages: newVariableValue)
