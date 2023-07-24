@@ -259,7 +259,7 @@ func closeFramework() {
     if State.shared.navigationController != nil {
         if let navigationController = State.shared.navigationController {
             let viewControllers = navigationController.viewControllers
-            let targetIndex = viewControllers.count - (State.shared.isFormOpen ? 4 : 3)
+            let targetIndex = viewControllers.count - (State.shared.isFormOpen ? 5 : 4)
             State.shared.isFormOpen = false
             if targetIndex >= 0 && targetIndex < viewControllers.count {
                 let targetViewController = viewControllers[targetIndex]

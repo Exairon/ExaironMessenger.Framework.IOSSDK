@@ -53,7 +53,7 @@ class SessionListView: UIView {
 
         imageView.downloaded(from:  Exairon.shared.src + "/uploads/channels/" + session.assignedTo.avatar.replacingOccurrences(of: "svg", with: "png"))
         lastMessageLabelView.text = convertHtmlStringToText(text: session.lastMessage.text ?? Localization().locale(key: "unsupportedMessage"))
-        customerNameLabelView.text = "Enes Toprak"
+        customerNameLabelView.text = (Exairon.shared.name ?? "") + " " + (Exairon.shared.surname ?? "")
         iconView.text = session.status == "closed" ? "►" : "•"
         iconView.textColor = session.status == "closed" ? UIColor(hexString: color?.headerColor ?? "#00FF57") : UIColor(hexString: "#00FF57")
 
