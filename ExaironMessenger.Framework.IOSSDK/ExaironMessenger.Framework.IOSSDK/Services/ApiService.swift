@@ -38,7 +38,7 @@ class ApiService {
     }
     
     func getCustomerSessions(userToken: String, user_unique_id: String, completion: @escaping (Result<CustomerSessionResponse, ApiErrors>)->Void) {
-        guard let url = URL(string: "\(Exairon.shared.src)/api/v1/sessions/getSdkCustomerSessions?userToken=\(userToken)&user_unique_id=\(user_unique_id)") else{
+        guard let url = URL(string: "\(Exairon.shared.src)/api/v1/sessions/getSdkCustomerSessions?userToken=\(userToken)&user_unique_id=\(user_unique_id)&channelId=\(Exairon.shared.channelId)") else{
             return
         }
         var urlRequest = URLRequest(url: url)
