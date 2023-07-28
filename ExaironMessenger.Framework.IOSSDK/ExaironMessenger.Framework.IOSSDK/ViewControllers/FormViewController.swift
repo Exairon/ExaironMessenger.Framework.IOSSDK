@@ -127,7 +127,6 @@ class FormViewController: UIViewController {
                     User.shared.phone = "\(self.phoneFieldView?.counrtyCodeField.text ?? "")\(self.phoneFieldView?.textField.text ?? "")"
                     User.shared.user_unique_id = Exairon.shared.user_unique_id
                     writeUserInfo()
-                    State.shared.oldMessages = []
                     State.shared.messageArray = []
                     writeMessage(messages: State.shared.messageArray)
                     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "chatViewController") as! ChatViewController

@@ -70,7 +70,6 @@ class SessionListViewController: UIViewController {
                             User.shared.phone = Exairon.shared.phone != nil && Exairon.shared.phone != "" ? Exairon.shared.phone : userInfo?.phone
                             User.shared.user_unique_id = Exairon.shared.user_unique_id != nil && Exairon.shared.user_unique_id != "" ? Exairon.shared.user_unique_id : userInfo?.user_unique_id
                             writeUserInfo()
-                            State.shared.oldMessages = []
                             State.shared.messageArray = []
                             writeMessage(messages: State.shared.messageArray)
 

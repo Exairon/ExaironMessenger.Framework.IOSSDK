@@ -233,7 +233,6 @@ func sendSurvey(value: Int, comment: String) {
                         "comment": comment] as [String : Any]
     let surveyRequest = SurveyRequest(channelId: Exairon.shared.channelId, session_id: readStringStorage(key: "conversationId") ?? "", surveyResult: surveyResult)
     SocketService.shared.socketEmit(eventName: "send_survey_result", object: surveyRequest)
-    State.shared.oldMessages = []
     State.shared.messageArray = []
     writeMessage(messages: State.shared.messageArray)
     writeStringStorage(value: "", key: "conversationId")

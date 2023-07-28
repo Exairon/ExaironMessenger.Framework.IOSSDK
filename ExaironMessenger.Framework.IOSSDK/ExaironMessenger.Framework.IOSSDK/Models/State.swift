@@ -17,7 +17,6 @@ struct State {
     var navigationController: UINavigationController? = nil
     var storyboard: UIStoryboard? = nil
     var tempMessage: Message? = nil
-    var oldMessages: [Message] = []
     var isChatOpen: Bool = false
     var isFormOpen: Bool = false
     var customerSessions: [CustomerSession] = []

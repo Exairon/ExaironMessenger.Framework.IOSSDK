@@ -15,7 +15,7 @@ public class ExaironViewController: UIViewController, UIGestureRecognizerDelegat
         super.viewDidLoad()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         splashIconView.image = UIImage(named:"exa_splash.png")
-        
+        State.shared.messageArray = []
         ApiService.shared.getWidgetSettingsApiCall(){ widgetSettings in
             switch(widgetSettings) {
             case .failure(let error):

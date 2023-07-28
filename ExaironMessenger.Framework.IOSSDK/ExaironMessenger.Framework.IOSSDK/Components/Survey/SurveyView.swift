@@ -84,7 +84,6 @@ class SurveyView: UIView {
     
     @IBAction func cancel(_ sender: UISlider) {
         writeMessage(messages: [])
-        State.shared.oldMessages = []
         State.shared.messageArray = []
         writeMessage(messages: State.shared.messageArray)
         writeStringStorage(value: "", key: "conversationId")
