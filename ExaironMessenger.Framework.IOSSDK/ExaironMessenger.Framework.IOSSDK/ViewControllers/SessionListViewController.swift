@@ -72,6 +72,8 @@ class SessionListViewController: UIViewController {
                             writeUserInfo()
                             State.shared.oldMessages = []
                             State.shared.messageArray = []
+                            writeMessage(messages: State.shared.messageArray)
+
                             self.changePage(identifier: "chatViewController")
                         }
                     }

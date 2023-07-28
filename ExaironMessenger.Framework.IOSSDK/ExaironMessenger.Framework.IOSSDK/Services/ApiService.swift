@@ -24,8 +24,8 @@ class ApiService {
         }.resume()
     }
     
-    func getNewMessagesApiCall(timestamp: String, conversationId: String, completion: @escaping (Result<MissingMessageResponse, ApiErrors>)->Void) {
-        guard let url = URL(string: "\(Exairon.shared.src)/api/v1/messages/getNewMessages/\(timestamp)/\(conversationId)") else{
+    func getNewMessagesApiCall(timestamp: String, conversationId: String, getAllType: String, completion: @escaping (Result<MissingMessageResponse, ApiErrors>)->Void) {
+        guard let url = URL(string: "\(Exairon.shared.src)/api/v1/messages/getNewMessages/\(timestamp)/\(conversationId)?getAllType=\(getAllType)") else{
             return
         }
         var urlRequest = URLRequest(url: url)
@@ -37,8 +37,8 @@ class ApiService {
         }.resume()
     }
     
-    func getCustomerSessions(userToken: String, completion: @escaping (Result<CustomerSessionResponse, ApiErrors>)->Void) {
-        guard let url = URL(string: "\(Exairon.shared.src)/api/v1/sessions/getSdkCustomerSessions?userToken=\(userToken)") else{
+    func getCustomerSessions(userToken: String, user_unique_id: String, completion: @escaping (Result<CustomerSessionResponse, ApiErrors>)->Void) {
+        guard let url = URL(string: "\(Exairon.shared.src)/api/v1/sessions/getSdkCustomerSessions?userToken=\(userToken)&user_unique_id=\(user_unique_id)") else{
             return
         }
         var urlRequest = URLRequest(url: url)

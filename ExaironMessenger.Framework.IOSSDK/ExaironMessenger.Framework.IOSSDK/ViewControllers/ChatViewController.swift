@@ -102,14 +102,6 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
         State.shared.navigationController = self.navigationController
         State.shared.storyboard = self.storyboard
         
-        if State.shared.oldMessages.count > 0 {
-            State.shared.messageArray = []
-            for message in State.shared.oldMessages {
-                State.shared.messageArray.append(message)
-            }
-            State.shared.oldMessages = []
-        }
-        
         scrollView = messageScrollView
         stackView = messageStackView
         chatsenderView = senderView
@@ -132,7 +124,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
                                          y: sessionListView.frame.size.height / 2)
             sessionFinishedLabelView.text = Localization().locale(key: "sessionEnded")
             if State.shared.selectedConversationId != nil {
-                getNewMessages(timestamp: "0", conversationId: State.shared.selectedConversationId!) { messages in
+                getNewMessages(timestamp: "0", conversationId: State.shared.selectedConversationId!, getAllType: "true") { messages in
                     DispatchQueue.main.async {
                         self.loadingView.isHidden = true
                     }
@@ -154,6 +146,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
                     State.shared.messageArray.append(message)
                 }
             }
+            writeMessage(messages: State.shared.messageArray)
             listenNewMessages()
             listenFinishSession()
         }
@@ -360,6 +353,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
             botMessage.timeStamp = Int64(NSDate().timeIntervalSince1970 * 1000)
             botMessage.sender = "bot_uttered"
             State.shared.messageArray.append(botMessage)
+            writeMessage(messages: State.shared.messageArray)
           }
           catch {
                 print(error)
@@ -367,7 +361,6 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func listenNewMessages() {
-        print("wtfff")
         socket = SocketService.shared.getSocket()
         //sendMessage(message: "carousel")
         socket?.off("bot_uttered")
@@ -388,13 +381,14 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
         timestamp = String(_timestamp)
         let conversationId = readStringStorage(key: "conversationId") ?? State.shared.selectedConversationId ?? ""
 
-        getNewMessages(timestamp: timestamp, conversationId: conversationId) { messages in
+        getNewMessages(timestamp: timestamp, conversationId: conversationId, getAllType: "false") { messages in
             if messages != nil {
                 for message in messages!.data {
                     DispatchQueue.main.async {
                         State.shared.messageArray.append(message)
                     }
                 }
+                writeMessage(messages: State.shared.messageArray)
             }
         }
         socket?.on("connect") { data, ack in
@@ -402,9 +396,6 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
             let sessionRequestObj = SessionRequest(session_id: conversationId, channelId: Exairon.shared.channelId)
             
             SocketService.shared.socketEmit(eventName: "session_request", object: sessionRequestObj)
-            print(timestamp)
-            print(conversationId)
-            
         }
     }
     

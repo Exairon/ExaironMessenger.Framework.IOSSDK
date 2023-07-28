@@ -37,7 +37,7 @@ public class ExaironViewController: UIViewController, UIGestureRecognizerDelegat
                 
                 let userToken: String = readStringStorage(key: "userToken") ?? UUID().uuidString
                 writeStringStorage(value: userToken, key: "userToken")
-                ApiService.shared.getCustomerSessions(userToken: userToken) { customerSessions in
+                ApiService.shared.getCustomerSessions(userToken: userToken, user_unique_id: Exairon.shared.user_unique_id ?? "") { customerSessions in
                     switch(customerSessions) {
                     case .failure(let error):
                         print(error)

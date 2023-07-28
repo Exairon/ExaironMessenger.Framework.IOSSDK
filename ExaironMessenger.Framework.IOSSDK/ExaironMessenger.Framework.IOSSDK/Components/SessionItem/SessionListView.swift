@@ -50,8 +50,14 @@ class SessionListView: UIView {
     
     func initialView() {
         let color = WidgetSettings.shared.data?.color
+        
+        if session.assignedTo?.avatar != nil {
+            imageView.downloaded(from: Exairon.shared.src + "/uploads/channels/" + (session.assignedTo!.avatar.replacingOccurrences(of: "svg", with: "png")))
+        } else {
+            imageView.downloaded(from: Exairon.shared.src + "/assets/images/default.jpg")
+        }
 
-        imageView.downloaded(from:  Exairon.shared.src + "/uploads/channels/" + session.assignedTo.avatar.replacingOccurrences(of: "svg", with: "png"))
+        
         lastMessageLabelView.text = convertHtmlStringToText(text: session.lastMessage.text ?? Localization().locale(key: "unsupportedMessage"))
         customerNameLabelView.text = (Exairon.shared.name ?? "") + " " + (Exairon.shared.surname ?? "")
         iconView.text = session.status == "closed" ? "►" : "•"

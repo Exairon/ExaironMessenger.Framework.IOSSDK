@@ -12,7 +12,7 @@ struct CustomerSession: Codable {
     let _id: String
     let lastMessage: Message
     let status: String
-    let assignedTo: Operator
+    var assignedTo: Operator? = nil
     let conversationId: String
 }
 

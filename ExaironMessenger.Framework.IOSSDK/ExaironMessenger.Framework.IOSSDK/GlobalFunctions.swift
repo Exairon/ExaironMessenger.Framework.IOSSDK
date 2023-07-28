@@ -67,6 +67,7 @@ func getUserMap() -> Dictionary<String, String> {
 func sendMessage(message: String, payload: String? = nil, ruleMessage: Bool? = false) {
     let newMessage = Message(sender: "user_uttered", type: "text", timeStamp: Int64(NSDate().timeIntervalSince1970 * 1000), text: message, ruleMessage: ruleMessage)
     State.shared.messageArray.append(newMessage)
+    writeMessage(messages: State.shared.messageArray)
 
     let user = getUserMap()
     let messageString: String = payload ?? message
@@ -108,6 +109,7 @@ func sendFileMessage(filename: String, mimeType: String, fileData: Data) {
 
             DispatchQueue.main.async {
                 State.shared.messageArray.append(newMessage)
+                writeMessage(messages: State.shared.messageArray)
             }
         }
     }
@@ -118,6 +120,7 @@ func sendLocationMessage(latitude: Double, longitude: Double) {
 
     let newMessage = Message(sender: "user_uttered", type: "location", timeStamp: Int64(NSDate().timeIntervalSince1970 * 1000), location: location)
     State.shared.messageArray.append(newMessage)
+    writeMessage(messages: State.shared.messageArray)
     let user = getUserMap()
     
     let userToken = readStringStorage(key: "userToken") ?? ""
@@ -214,8 +217,8 @@ func readUserInfo() -> User? {
 }
 
 
-func getNewMessages(timestamp: String, conversationId: String, completion: @escaping(_ messages: MissingMessageResponse?) -> Void) {
-    ApiService.shared.getNewMessagesApiCall(timestamp: timestamp, conversationId: conversationId) { result in
+func getNewMessages(timestamp: String, conversationId: String, getAllType: String, completion: @escaping(_ messages: MissingMessageResponse?) -> Void) {
+    ApiService.shared.getNewMessagesApiCall(timestamp: timestamp, conversationId: conversationId, getAllType: getAllType) { result in
         switch result {
         case .failure(_):
             completion(nil)
@@ -232,6 +235,7 @@ func sendSurvey(value: Int, comment: String) {
     SocketService.shared.socketEmit(eventName: "send_survey_result", object: surveyRequest)
     State.shared.oldMessages = []
     State.shared.messageArray = []
+    writeMessage(messages: State.shared.messageArray)
     writeStringStorage(value: "", key: "conversationId")
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
         closeFramework()
@@ -246,6 +250,7 @@ func listenFinishSession() {
             let time = Int64(NSDate().timeIntervalSince1970 * 1000)
             let surveyMessage = Message(sender: "bot_uttered", type: "survey", timeStamp: time)
             State.shared.messageArray.append(surveyMessage)
+            writeMessage(messages: State.shared.messageArray)
             chatsenderView?.alpha = 0
         } else {
             writeMessage(messages: [])

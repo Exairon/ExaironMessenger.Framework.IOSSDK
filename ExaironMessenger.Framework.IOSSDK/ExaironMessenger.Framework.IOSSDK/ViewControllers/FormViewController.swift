@@ -129,6 +129,7 @@ class FormViewController: UIViewController {
                     writeUserInfo()
                     State.shared.oldMessages = []
                     State.shared.messageArray = []
+                    writeMessage(messages: State.shared.messageArray)
                     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "chatViewController") as! ChatViewController
                     self.navigationController?.pushViewController(viewController, animated: true)
                     State.shared.isChatOpen = true
@@ -195,10 +196,6 @@ class FormViewController: UIViewController {
         }
 
         headerHeight += 100
-    }
-    
-    @objc func openCountryBottomSheet() {
-        print("enes")
     }
     
     func getFormFields() -> FormFields {

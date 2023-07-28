@@ -26,7 +26,6 @@ struct State {
     var isNewSession: Bool = false
     var messageArray: [Message] = [] {
         willSet(newVariableValue) {
-            writeMessage(messages: newVariableValue)
             if newVariableValue.count > 0 {
                 let newMessageView = getMessageView(message: newVariableValue[newVariableValue.count - 1])
                 let timeView = getTimeView(message: newVariableValue[newVariableValue.count - 1])

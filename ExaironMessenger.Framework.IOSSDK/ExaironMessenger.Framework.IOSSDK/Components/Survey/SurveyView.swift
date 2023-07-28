@@ -86,6 +86,7 @@ class SurveyView: UIView {
         writeMessage(messages: [])
         State.shared.oldMessages = []
         State.shared.messageArray = []
+        writeMessage(messages: State.shared.messageArray)
         writeStringStorage(value: "", key: "conversationId")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             closeFramework()
